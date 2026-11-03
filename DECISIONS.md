@@ -53,3 +53,8 @@
 - [M8] B (blank) and J (captions, Room mode only) work over the board too — Excalidraw binds neither key. D toggles "dim room" inside the room window (plus a hover-revealed button).
 - [M8] Room forces its own theme via a `data-theme` wrapper (light default), independent of the console's theme.
 - [M8] Top-bar room status: "Open room view" until a room exists, then a menu button outlined green while a board is showing ("In the room"), with blank/captions/stop-showing items.
+- [M9] Board switcher is a "Boards n" menu in the board header (only with ≥ 2 boards), marking the current board and the one in the room.
+- [M9] Session summary (duration, words, suggestions, marked moments, boards) appears at the top of the rail once the session has ended; pure `summarise()` is unit-tested.
+- [M9] Provisional bar never wraps: below 1360px viewport it shortens to "Clear" / "Re-fill" (aria-labels keep the full names).
+- [M9] Sticky font size left as-is (16px): bigger text would make Excalidraw grow sticky heights and break the guaranteed non-overlap; the room view instead zooms to the board's bounds.
+- [M9] Packing, re-fill merge, ghost labels and reduced motion were already done in M2/M3/M6; checked, no changes needed.

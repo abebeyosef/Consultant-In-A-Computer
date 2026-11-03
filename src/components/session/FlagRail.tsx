@@ -23,6 +23,7 @@ export function FlagRail({
   onSuggest,
   suggesting,
   suggestNote,
+  summary,
 }: {
   frameworks: Map<string, FrameworkTemplate>;
   onOpen: (s: Suggestion) => void;
@@ -33,6 +34,8 @@ export function FlagRail({
   onSuggest: () => void;
   suggesting: boolean;
   suggestNote?: string | null;
+  /** session summary (shown once the session has ended) */
+  summary?: React.ReactNode;
 }) {
   const suggestions = useConsole((s) => s.session.suggestions);
   const clockMs = useConsole((s) => s.clockMs);
@@ -52,7 +55,8 @@ export function FlagRail({
         ) : null}
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
-        {active.length === 0 && earlier.length === 0 ? (
+        {summary}
+        {active.length === 0 && earlier.length === 0 && !summary ? (
           <p className="mx-auto mt-[18vh] max-w-[220px] text-center text-[14px] leading-[1.5] text-ink-muted" data-testid="rail-empty">
             Suggestions appear here when a framework could help.
           </p>

@@ -46,7 +46,7 @@ export function TopBar({
 
       <div className="flex items-center gap-3">
         <ListeningPill
-          state={status === "ended" ? "idle" : pill}
+          state={status === "ended" ? "ended" : pill}
           elapsedMs={clockMs}
           level={kind === "mic" ? level : undefined}
           unseen={unseen}

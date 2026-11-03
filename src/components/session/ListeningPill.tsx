@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 
-export type PillState = "listening" | "paused" | "idle" | "replaying";
+export type PillState = "listening" | "paused" | "idle" | "replaying" | "ended";
 
 export function formatElapsed(ms: number): string {
   const total = Math.max(0, Math.floor(ms / 1000));
@@ -53,7 +53,7 @@ export function ListeningPill({
 }) {
   const live = state === "listening" || state === "replaying";
   const label =
-    state === "listening" ? "Listening" : state === "replaying" ? "Sample" : state === "paused" ? "Paused" : "Ready";
+    state === "listening" ? "Listening" : state === "replaying" ? "Sample" : state === "paused" ? "Paused" : state === "ended" ? "Ended" : "Ready";
   return (
     <div
       role="status"

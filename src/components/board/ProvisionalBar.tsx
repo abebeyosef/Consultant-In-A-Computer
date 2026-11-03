@@ -33,7 +33,7 @@ export function ProvisionalBar({
           animate={{ opacity: 1, y: 0 }}
           exit={reduce ? { opacity: 0 } : { opacity: 0, y: 8 }}
           transition={{ duration: 0.18, ease: [0.2, 0.8, 0.2, 1] }}
-          className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-full border border-hairline bg-surface py-1 pl-3.5 pr-1 text-[13px]"
+          className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-hairline bg-surface py-1 pl-3.5 pr-1 text-[13px]"
           data-testid="provisional-bar"
           role="toolbar"
           aria-label="AI suggestions on this board"
@@ -49,17 +49,18 @@ export function ProvisionalBar({
               <Button size="sm" variant="ghost" onClick={onKeepAll} className="rounded-full">
                 <Check strokeWidth={1.5} /> Keep all
               </Button>
-              <Button size="sm" variant="ghost" onClick={onClear} className="rounded-full">
-                <X strokeWidth={1.5} /> Clear AI items
+              <Button size="sm" variant="ghost" onClick={onClear} className="rounded-full" aria-label="Clear AI items">
+                <X strokeWidth={1.5} /> Clear<span className="max-[1360px]:hidden">&nbsp;AI items</span>
               </Button>
             </>
           ) : (
             <span className="mr-1.5 text-ink-muted">Nothing filled in yet</span>
           )}
           {onRefill ? (
-            <Button size="sm" variant="ghost" onClick={onRefill} disabled={refilling} className="rounded-full">
+            <Button size="sm" variant="ghost" onClick={onRefill} disabled={refilling} className="rounded-full" aria-label={refilling ? "Filling from transcript" : "Re-fill from transcript"}>
               <RotateCw strokeWidth={1.5} className={refilling ? "animate-spin" : undefined} />
-              {refilling ? "Filling from transcript…" : "Re-fill from transcript"}
+              {refilling ? "Filling…" : "Re-fill"}
+              {refilling ? null : <span className="max-[1360px]:hidden">&nbsp;from transcript</span>}
             </Button>
           ) : null}
         </motion.div>

@@ -1,5 +1,5 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-03 04:20
+Last updated: 2026-11-03 04:45
 Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s; fills 11–50s (minimal effort, hedged after 10s)
 
 | Milestone | Status | Notes |
@@ -13,14 +13,14 @@ Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s
 | M6 | DONE | flag card, arrival, pill dot, Not now, mute, Earlier, quote scroll + underline, Preparing timer → auto-open; verified live (qa/tools/rail-check.mjs) |
 | M7 | DONE | e2e 5/5 (mock); live eval 10/10, 0 false positives, median 5.8s; live sample 3 flags in order; README + DEMO draft; tag v0.1-night1 |
 | M8 | DONE | /room + BroadcastChannel bridge, Send to room (accepted only), follow pan/zoom (clipped to board), B blank, J captions, dim room, status menu; e2e room.spec (2) green |
-| M9 | IN_PROGRESS | next: board switcher, session summary, QA at 1280×800 + 1728×1117 |
-| M10 | TODO | |
+| M9 | DONE | board switcher, session summary, pill "Ended", provisional bar fits at 1280, start card fits at 800 high; QA shots at 1280×800 + 1728×1117 both themes |
+| M10 | IN_PROGRESS | next: export PNG/JSON, share link /view#, copy session notes |
 | M11 | TODO | |
 | M12 | TODO | |
 | M13 | TODO | |
 
 ## Next action
-M9: board switcher (session boards) in board header, session summary panel, packing/ghost label polish, reduced-motion + focus states check, empty/error states; screenshot QA at 1280×800 and 1728×1117. Consider larger sticky text for projector readability.
+M10: board header "Share" menu: Export PNG (exportToBlob), Export .excalidraw JSON, Copy share link (lz-string accepted elements → /view#…, read-only Excalidraw), and "Copy session notes" (Markdown) in the session summary + board menu; e2e: copied link opened in a fresh page shows the board read-only.
 
 ## Blocked / fallbacks
 - none yet

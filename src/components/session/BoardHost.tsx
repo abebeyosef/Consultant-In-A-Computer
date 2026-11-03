@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import { BoardPanel } from "@/components/board/BoardPanel";
+import { BoardSwitcher } from "@/components/board/BoardSwitcher";
 import { SendToRoom } from "@/components/board/SendToRoom";
 import { type StoredBoard, loadBoard, saveBoard } from "@/lib/board/store";
 import { matchQuoteToSegments } from "@/lib/brain/evidence";
@@ -24,6 +25,8 @@ export function BoardHost({
   const store = useConsoleStore();
   const room = useRoom();
   const closeBoard = useConsole((s) => s.closeBoard);
+  const openBoard = useConsole((s) => s.openBoard);
+  const boardIds = useConsole((s) => s.session.boardIds);
   const [board] = useState(() => loadBoard(boardId));
   const latest = useRef(board);
   const showQuote = useMemo(
@@ -70,7 +73,10 @@ export function BoardHost({
       onShowQuote={showQuote}
       onViewport={onViewport}
       headerRight={
-        room ? <SendToRoom inRoom={room.roomBoardId === boardId} onSend={() => latest.current && room.send(latest.current)} /> : null
+        <>
+          <BoardSwitcher boardIds={boardIds} currentId={boardId} roomBoardId={room?.roomBoardId} onSelect={(id) => openBoard(id)} />
+          {room ? <SendToRoom inRoom={room.roomBoardId === boardId} onSend={() => latest.current && room.send(latest.current)} /> : null}
+        </>
       }
     />
   );

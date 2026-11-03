@@ -14,6 +14,7 @@ import { BoardHost } from "./BoardHost";
 import { ConsoleContext, useConsole } from "./ConsoleContext";
 import { ConsoleLayout } from "./ConsoleLayout";
 import { RoomControls } from "./RoomControls";
+import { SessionSummary } from "./SessionSummary";
 import { FlagRail } from "./FlagRail";
 import { FocusMode } from "./FocusMode";
 import { ShortcutBar, type Shortcut } from "./ShortcutBar";
@@ -167,6 +168,7 @@ function Console({ store }: { store: ConsoleStore }) {
             onSuggest={() => brain.checkNow("manual")}
             suggesting={brain.manualBusy}
             suggestNote={brain.manualNote}
+            summary={status === "ended" ? <SessionSummary /> : undefined}
           />
         }
         footer={
