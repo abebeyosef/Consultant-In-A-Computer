@@ -62,3 +62,7 @@
 - [M10] Share links drop fields Excalidraw restores itself (versionNonce, seed, index…) and slim customData; a matrix board is ~6k chars of URL, fine for Chrome. `/view` stores nothing.
 - [M10] Session notes group kept items under their quadrant/block/cell labels (read from the board's own label elements), list facilitator-drawn items under "Other notes", count unreviewed AI suggestions, and list marked moments. Available from the board's Share menu and the end-of-session summary.
 - [M10] Radix dropdown occasionally ignores a click immediately after a previous item's async action in headless tests; e2e reopens with a retry. Not seen as a user-facing issue.
+- [M11] Custom frameworks: pure `buildCustomFramework` turns the form into a zod-validated template (`custom-<slug>` ids, never clashing with built-ins); canvas blocks auto-grid (2 columns up to 4 blocks, else 3). Plumbing to checks/⌘K/chips/fill already used `getAllFrameworks()`, so no brain changes were needed.
+- [M11] Import accepts an export bundle, an array, or a single template; imported ids equal to a built-in are prefixed `custom-`; same id replaces (so re-importing updates).
+- [M11] Form validation messages use ink, not red (red is reserved for Stop/delete per §8.1).
+- [M11] Verified live: Muse Spark picked a custom "Risk heat map" as a strong fit (4s) and filled it with sensible likelihood/severity scores (20s) — `scripts/try-custom.ts`.

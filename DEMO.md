@@ -49,6 +49,13 @@ On any board, **Share** → *Copy read-only link* (opens anywhere, no account; k
 only), *Download PNG*, *Download .excalidraw file*, or *Copy session notes* (Markdown).
 After **Stop**, the rail shows a session summary with the same notes button.
 
+## 6. Your own frameworks
+
+**Library → Add a framework**: name, when it helps, signal phrases, and a layout (2×2,
+canvas, table or chain) with its labels. It's immediately listened for, appears in ⌘K
+and on the start card, and boards pre-fill from the transcript. Export/import as JSON
+to share a firm's set.
+
 ## Keyboard shortcuts
 
 | Key | Action |
