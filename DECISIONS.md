@@ -10,3 +10,10 @@
 - [M1] shadcn semantic vars (`--primary`, `--border`, …) are defined in terms of the §8 tokens, so restyling is central rather than per component. Added a `danger` button variant for Stop.
 - [M1] Added derived tokens `--signal-ink` (amber text readable on paper) and `--flag-shadow` (the single on-screen shadow).
 - [M1] Dev indicator disabled so screenshots stay clean.
+- [M2] Renderers emit a pure "skeleton" (plain objects, no Excalidraw import) so they're unit-testable in Node; `lib/board/excalidraw.ts` converts on the client with `convertToExcalidrawElements({regenerateIds:false})`.
+- [M2] Matrix placement: quadrant by score (4–5 = high half), then nearest free cell in a fixed 3×3 grid per quadrant — non-overlap is guaranteed by construction; overflow spills to the nearest free cell anywhere.
+- [M2] Canvas/table rows grow to fit their stickies (row heights computed from item counts), so 12+ items never overlap.
+- [M2] Structure elements (axes, block outlines, labels) are `locked` so the facilitator can't nudge the frame by accident; stickies are free.
+- [M2] Board text uses Excalidraw's Helvetica (system font) for a clean consulting look; Excalidraw fonts are self-hosted via a postinstall copy to public/excalidraw-assets (offline demo).
+- [M2] Library previews use `exportToSvg` rather than ten live Excalidraw canvases (much lighter).
+- [M2] Sample script and canned fills live in lib/transcript/sampleScript.ts and lib/frameworks/sampleFills.ts; illustrative fills for the other seven frameworks are clearly marked as preview-only.

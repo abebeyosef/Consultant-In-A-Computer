@@ -11,7 +11,8 @@
     "test": "vitest run",
     "e2e": "playwright test",
     "eval": "tsx scripts/eval-check.ts",
-    "test-model": "tsx scripts/test-model.ts"
+    "test-model": "tsx scripts/test-model.ts",
+    "postinstall": "node scripts/copy-excalidraw-assets.mjs"
   },
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.1",

@@ -47,3 +47,4 @@ last-run.log
 /playwright-report/
 /qa/screenshots/*.png
 !.env.example
+/public/excalidraw-assets/
