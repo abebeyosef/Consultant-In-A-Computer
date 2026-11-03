@@ -99,7 +99,7 @@ export function renderTable(fw: FrameworkTemplate, layout: TableLayout, fill: Ta
         return;
       }
       flowCells(cellBox, items.length, 14, 14, 12, colW - 28).forEach((cell, i) => {
-        els.push(aiSticky(`${p}-ai-${n++}`, cell, items[i], fw.id, `c:${r}|${c}`, opts.suggestionId));
+        els.push(aiSticky(`${opts.stickyIdPrefix ?? p}-ai-${n++}`, cell, items[i], fw.id, `c:${r}|${c}`, opts.suggestionId));
       });
     });
     y += rowH[r];

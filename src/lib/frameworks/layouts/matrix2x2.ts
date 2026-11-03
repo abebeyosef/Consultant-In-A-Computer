@@ -27,7 +27,7 @@ export const MATRIX = {
   plotTop: TITLE_BLOCK + 16,
   plotWidth: 1070,
   plotHeight: 790,
-  sticky: { width: 160, height: 84, fontSize: 14 },
+  sticky: { width: 164, height: 88, fontSize: 16 },
   cols: 3,
   rows: 3,
   labelBand: 46,
@@ -145,7 +145,7 @@ export function renderMatrix(fw: FrameworkTemplate, layout: Matrix2x2Layout, fil
   const used = new Set<string>();
   placed.forEach(({ item, cell }, i) => {
     used.add(cell.group);
-    els.push(aiSticky(`${p}-ai-${i}`, cell, item, fw.id, `q:${cell.group}`, opts.suggestionId, M.sticky.fontSize));
+    els.push(aiSticky(`${opts.stickyIdPrefix ?? p}-ai-${i}`, cell, item, fw.id, `q:${cell.group}`, opts.suggestionId, M.sticky.fontSize));
   });
 
   for (const q of quads) {

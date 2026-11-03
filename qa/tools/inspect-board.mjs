@@ -1,0 +1,16 @@
+import { chromium } from "@playwright/test";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+const errs = [];
+p.on("pageerror", (e) => errs.push(e.message));
+p.on("console", (m) => m.type() === "error" && errs.push(m.text()));
+await p.goto("http://localhost:3200/board?fw=value-feasibility&fill=example", { waitUntil: "networkidle" });
+await p.waitForTimeout(3000);
+console.log("url", p.url());
+await p.screenshot({ path: "/Users/yosefabebe/Desktop/Consultant-In-A-Computer/qa/screenshots/board-raw.png" });
+const ids = await p.$$eval("[data-testid]", (els) => els.map((e) => e.getAttribute("data-testid")));
+console.log("testids", [...new Set(ids)].join(" "));
+const cls = await p.$$eval(".excalidraw [class]", (els) => [...new Set(els.flatMap((e) => [...e.classList]))].filter((c) => /menu|sidebar|help|toolbar|footer|App-|Island|library|trigger/i.test(c)));
+console.log("classes", cls.join(" "));
+console.log("errors", errs.slice(0, 5));
+await b.close();

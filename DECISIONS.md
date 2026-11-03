@@ -17,3 +17,9 @@
 - [M2] Board text uses Excalidraw's Helvetica (system font) for a clean consulting look; Excalidraw fonts are self-hosted via a postinstall copy to public/excalidraw-assets (offline demo).
 - [M2] Library previews use `exportToSvg` rather than ten live Excalidraw canvases (much lighter).
 - [M2] Sample script and canned fills live in lib/transcript/sampleScript.ts and lib/frameworks/sampleFills.ts; illustrative fills for the other seven frameworks are clearly marked as preview-only.
+- [M3] Accept-on-edit compares a per-sticky signature (x, y, width, text) captured at placement instead of raw element versions — Excalidraw bumps versions itself when it re-measures text after fonts load, which would otherwise auto-accept everything.
+- [M3] Acceptance is deferred until the gesture ends (drag/resize/text edit), then applied with CaptureUpdateAction.EVENTUALLY so undo groups it with the user's edit.
+- [M3] Toolbar trimmed with CSS (`.ToolIcon:has([data-testid=toolbar-…])`) since Excalidraw 0.18 has no API to hide individual tools; style panel, main menu, library and help are hidden too. Excalidraw's own frame-name label is off (`frameRendering.name=false`) because the frame has an in-canvas title.
+- [M3] Standalone `/board?fw=…` route (scratch session) powers "Open board" from /library; the same BoardPanel is embedded in the session console later.
+- [M3] `window.__ciacBoardApi` exposes the Excalidraw API for Playwright tests (harmless debug hook).
+- [M3] Re-fill merge implemented now (not M9): drops current provisional items, adds new ones nudged clear of existing stickies, skips duplicates of text already on the board, never touches accepted items.

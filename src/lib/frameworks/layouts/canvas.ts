@@ -72,7 +72,7 @@ export function renderCanvas(fw: FrameworkTemplate, layout: CanvasLayout, fill: 
       continue;
     }
     flowCells(box, items.length, LABEL_BAND).forEach((cell, i) => {
-      els.push(aiSticky(`${p}-ai-${n++}`, cell, items[i], fw.id, `b:${b.id}`, opts.suggestionId));
+      els.push(aiSticky(`${opts.stickyIdPrefix ?? p}-ai-${n++}`, cell, items[i], fw.id, `b:${b.id}`, opts.suggestionId));
     });
   }
   const bounds = { x: ox, y: oy, width: g.width, height: g.height };

@@ -57,7 +57,7 @@ export function renderChain(fw: FrameworkTemplate, layout: ChainLayout, fill: Ch
     const v = values[s.key];
     if (v?.text) {
       els.push(
-        aiSticky(`${p}-ai-${n++}`, { x: box.x + 14, y: box.y + 10, width: BOX_W - 28, height: BOX_H - 20 }, v, fw.id, `chain:${s.key}`, opts.suggestionId, 16),
+        aiSticky(`${opts.stickyIdPrefix ?? p}-ai-${n++}`, { x: box.x + 14, y: box.y + 10, width: BOX_W - 28, height: BOX_H - 20 }, v, fw.id, `chain:${s.key}`, opts.suggestionId, 16),
       );
     } else {
       els.push(ghost(`${p}-ghost-${s.key}`, box.x + 24, box.y + BOX_H / 2 - 10, s.hint, fw.id, `chain:${s.key}`));

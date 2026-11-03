@@ -17,8 +17,12 @@ async function main() {
   const wait = Number(process.env.SHOOT_WAIT ?? 800);
   const browser = await chromium.launch();
   for (const spec of specs) {
-    const [name, rest] = spec.split("=");
-    const [p, size] = rest.split("@");
+    const eq = spec.indexOf("=");
+    const name = spec.slice(0, eq);
+    const rest = spec.slice(eq + 1);
+    const at = rest.lastIndexOf("@");
+    const p = at > 0 ? rest.slice(0, at) : rest;
+    const size = at > 0 ? rest.slice(at + 1) : undefined;
     const [w, h] = (size ?? "1440x900").split("x").map(Number);
     for (const theme of themes) {
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, colorScheme: theme, deviceScaleFactor: 1 });

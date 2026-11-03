@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { SiteHeader } from "@/components/common/SiteHeader";
 import { FrameworkPreview } from "@/components/board/FrameworkPreview";
+import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { BUILTIN_FRAMEWORKS } from "@/lib/frameworks/builtins";
 import { loadCustomFrameworks } from "@/lib/frameworks/custom";
@@ -57,7 +59,12 @@ export function LibraryView() {
                   <span className="ml-auto text-mono-sm">{LAYOUT_NAMES[fw.layout.type]}</span>
                 </div>
                 <p className="line-clamp-3 text-[13px] leading-[1.5] text-ink-muted">{fw.whenToUse}</p>
-                {fw.source === "custom" ? <span className="text-[12px] text-ink-muted">Custom</span> : null}
+                <div className="mt-2 flex items-center gap-2">
+                  <Button asChild size="sm" variant="outline">
+                    <Link href={`/board?fw=${fw.id}&fill=${mode === "filled" ? "example" : "none"}`}>Open board</Link>
+                  </Button>
+                  {fw.source === "custom" ? <span className="text-[12px] text-ink-muted">Custom</span> : null}
+                </div>
               </div>
             </li>
           ))}

@@ -136,3 +136,36 @@
 @media (prefers-reduced-motion: reduce) {
   .ciac-meter-bar { animation: none; height: 7px; }
 }
+
+/* ---------- Excalidraw: calm, minimal toolbar (BUILD_PLAN §9.4) ---------- */
+.ciac-board .excalidraw {
+  --color-primary: var(--accent);
+  --color-primary-darker: var(--accent);
+  --color-primary-darkest: var(--accent);
+  --color-primary-light: color-mix(in srgb, var(--accent) 14%, transparent);
+  --ui-font: var(--font-ui);
+  --island-bg-color: var(--surface);
+  --shadow-island: 0 0 0 1px var(--hairline);
+  --default-bg-color: var(--bg);
+}
+.ciac-board .excalidraw .ToolIcon:has([data-testid="toolbar-lock"]),
+.ciac-board .excalidraw .ToolIcon:has([data-testid="toolbar-diamond"]),
+.ciac-board .excalidraw .ToolIcon:has([data-testid="toolbar-ellipse"]),
+.ciac-board .excalidraw .ToolIcon:has([data-testid="toolbar-line"]),
+.ciac-board .excalidraw .ToolIcon:has([data-testid="toolbar-freedraw"]),
+.ciac-board .excalidraw .ToolIcon:has([data-testid="toolbar-image"]),
+.ciac-board .excalidraw .App-toolbar__extra-tools-trigger,
+.ciac-board .excalidraw .App-toolbar__divider,
+.ciac-board .excalidraw .main-menu-trigger,
+.ciac-board .excalidraw .sidebar-trigger,
+.ciac-board .excalidraw .default-sidebar-trigger,
+.ciac-board .excalidraw .help-icon,
+.ciac-board .excalidraw .HintViewer,
+.ciac-board .excalidraw .App-menu__left,
+.ciac-board .excalidraw .ToolIcon__keybinding {
+  display: none !important;
+}
+.ciac-board--view .excalidraw .layer-ui__wrapper__footer,
+.ciac-board--view .excalidraw .App-menu_top {
+  display: none !important;
+}

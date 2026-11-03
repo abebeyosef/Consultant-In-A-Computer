@@ -80,6 +80,8 @@ export type RenderOptions = {
   suggestionId?: string;
   /** top-left origin of the frame */
   origin?: { x: number; y: number };
+  /** prefix for AI sticky ids (defaults to idPrefix); differs per re-fill so ids stay unique */
+  stickyIdPrefix?: string;
 };
 
 /* ---------- builders ---------- */
