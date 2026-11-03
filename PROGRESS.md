@@ -1,5 +1,5 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-03 00:45
+Last updated: 2026-11-03 01:25
 Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 
 | Milestone | Status | Notes |
@@ -8,8 +8,8 @@ Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 | M1 | DONE | tokens, fonts, themed shadcn, Spark, pill, flag card, /styleguide screenshots reviewed |
 | M2 | DONE | 10 templates, 4 renderers (pure skeletons), /library SVG previews, 37 unit tests |
 | M3 | DONE | BoardPanel (Excalidraw), accept-on-edit, provisional bar, source popover, ⌘K, localStorage; verified with qa/tools/board-*.mjs |
-| M4 | IN_PROGRESS | next: transcript store + sources + start card + console |
-| M5 | TODO | |
+| M4 | DONE | start card, console, sample/paste replay, mic (Web Speech, unit-tested with a fake), mark, focus, pause/resume, reload restore |
+| M5 | IN_PROGRESS | next: /api/check, /api/fill, prompts, mock engine, scheduler; replace useBrain stub |
 | M6 | TODO | |
 | M7 | TODO | |
 | M8 | TODO | |
@@ -20,10 +20,10 @@ Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 | M13 | TODO | |
 
 ## Next action
-M4: transcript types/store, sources (mic/paste/sample, bot stub), start card at /, session console /session/[id] with transcript view, mark moment, focus, pause/stop, persistence.
+M5: schemas/prompts, /api/check + /api/fill (live + defensive fallback + mock), mock engine with canned sample fills, scheduler (pure, 2 pacing profiles), real useBrain (replace stub in src/components/session/useBrain.ts).
 
 ## Blocked / fallbacks
 - none yet
 
 ## Needs Yosef's eyes in the morning
-- none yet
+- Live microphone in Chrome (can't be tested headlessly): Start listening → speak → text should appear; covered by unit tests with a fake SpeechRecognition.

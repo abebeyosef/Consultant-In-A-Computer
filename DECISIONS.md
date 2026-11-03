@@ -23,3 +23,11 @@
 - [M3] Standalone `/board?fw=…` route (scratch session) powers "Open board" from /library; the same BoardPanel is embedded in the session console later.
 - [M3] `window.__ciacBoardApi` exposes the Excalidraw API for Playwright tests (harmless debug hook).
 - [M3] Re-fill merge implemented now (not M9): drops current provisional items, adds new ones nudged clear of existing stickies, skips duplicates of text already on the board, never touches accepted items.
+- [M4] Zustand (vanilla store + context) for the console: sources, scheduler and board callbacks read/write state outside React render.
+- [M4] Sample and paste share one `ReplaySource` (scripted timeline: interim word-by-word, then sentence finals). The session clock *is* the replay clock, so the 1×/1.5×/3× control also speeds up check pacing and elapsed time.
+- [M4] Sample timeline honours the script's [mm:ss] anchors (compressing pace where a paragraph is long) so flags land near the marked points.
+- [M4] Paste default speed 2× (≈300 wpm); "Process instantly" emits every final at once (brain scans windows over it in M5).
+- [M4] A reloaded live session comes back paused; mic/replay resumes only on click. Replay resumes from the saved position.
+- [M4] Start listening calls getUserMedia in the click handler (prompt appears right after the click), then navigates to the console which starts recognition. The start card shows the live level only if mic permission was already granted.
+- [M4] Source cleanup is deferred a tick so React StrictMode's simulated unmount doesn't stop a running source.
+- [M4] `typecheck` runs `next typegen` first so `PageProps<'/session/[id]'>` route types exist without a build.

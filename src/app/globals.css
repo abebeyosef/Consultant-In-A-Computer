@@ -169,3 +169,10 @@
 .ciac-board--view .excalidraw .App-menu_top {
   display: none !important;
 }
+
+/* Transcript: finalised words settle from muted to ink (never rewritten) */
+@keyframes ciac-ink-in {
+  from { color: var(--ink-muted); }
+  to { color: var(--ink); }
+}
+.ciac-ink-in { animation: ciac-ink-in 520ms var(--ease) both; }
