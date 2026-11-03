@@ -134,6 +134,7 @@ export function TranscriptView() {
                 <>
                   <LevelMeter level={kind === "mic" ? level : undefined} active={live} className={live ? "text-live" : "text-ink-muted/60"} />
                   <p className="text-[17px]">{live ? "Listening. Your conversation will appear here." : "Paused. Resume to keep transcribing."}</p>
+                  {live && kind === "bot" && sourceMessage ? <p className="text-[14px]" data-testid="bot-note">{sourceMessage}</p> : null}
                 </>
               )}
             </div>

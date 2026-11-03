@@ -1,5 +1,5 @@
-STATUS: IN_PROGRESS
-Last updated: 2026-11-03 06:30
+STATUS: ALL_DONE
+Last updated: 2026-11-03 07:20
 Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s; fills 11–50s (minimal effort, hedged after 10s)
 
 | Milestone | Status | Notes |
@@ -17,14 +17,18 @@ Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s
 | M10 | DONE | Share menu (read-only link → /view#, PNG, .excalidraw, session notes Markdown), summary "Copy session notes"; e2e share.spec (fresh context opens link read-only) green |
 | M11 | DONE | /library "Add a framework" form (4 layouts), edit/remove, JSON import/export; appears in checks, ⌘K, chips; e2e custom.spec green; live check+fill verified; tag v0.2-night2 |
 | M12 | DONE | error boundaries, perf check (2 h transcript, 0 long tasks), axe clean both themes, scan pacing for instant paste, final DEMO.md (2-min + 30-s scripts); 11/11 e2e green |
-| M13 | IN_PROGRESS | next: research meeting-bot options, bot source behind ENABLE_MEET_BOT |
+| M13 | DONE | Vexa adapter + mock provider behind ENABLE_MEET_BOT, BotSource (polling), /api/bot, MEET_BOT_SETUP.md; e2e bot.spec (flag off + on) green; NOT tested against a real Vexa account; tag v0.3-night3 |
 
 ## Next action
-M13: research Recall.ai / Attendee / Vexa from official docs (log choice + costs in DECISIONS), implement `bot` TranscriptSource behind ENABLE_MEET_BOT=1 (start-card "Join a call", server adapter, transcript events into the pipeline), MEET_BOT_SETUP.md; must not affect any path with the flag off. Then tag v0.3-night3 and write STATUS: ALL_DONE.
+All milestones done. Optional next steps: real Vexa test call (see MEET_BOT_SETUP.md), rehearse DEMO.md on the demo machine.
 
 ## Blocked / fallbacks
 - none yet
 
 ## Needs Yosef's eyes in the morning
+- Rehearse DEMO.md (2-minute script + 30-second fallback) on the demo machine and projector.
+- Room view on a real second screen: drag the room window to the projector, Send to room, try B / J / D.
+- Meet bot is untested with a real account: follow MEET_BOT_SETUP.md (Vexa free credit) if you want it in the demo; mock mode works offline (`ENABLE_MEET_BOT=1 MEET_BOT_PROVIDER=mock`).
+- Live eval: 10/10 (`npm run eval`); re-run on the day to confirm the API key/model still behave.
 - Live fills take 17–30 s (hedged); the flag shows "Preparing board… Ns" meanwhile. If too slow on demo day, MOCK_MODE=1 gives instant canned sample boards.
 - Live microphone in Chrome (can't be tested headlessly): Start listening → speak → text should appear; covered by unit tests with a fake SpeechRecognition.

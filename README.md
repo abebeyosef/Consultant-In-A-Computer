@@ -43,7 +43,9 @@ mock for 60 s after three consecutive API failures, so the demo never stalls.
 | `MODEL_BASE_URL` | `https://api.meta.ai/v1` | API base URL |
 | `MODEL_ID` | `muse-spark-1.1` | Model id (this machine uses `muse-spark-1.3`) |
 | `MOCK_MODE` | `0` | `1` forces the offline engine |
-| `ENABLE_MEET_BOT` | `0` | Google Meet bot transcript source (Phase C, experimental) |
+| `ENABLE_MEET_BOT` | `0` | Google Meet bot transcript source (experimental — see `MEET_BOT_SETUP.md`) |
+| `MEET_BOT_PROVIDER` | auto | `vexa` or `mock` (auto: `vexa` if `VEXA_API_KEY` is set, else `mock`) |
+| `VEXA_API_KEY`, `VEXA_API_BASE` | — | Vexa meeting-bot API (hosted or self-hosted) |
 
 ## Scripts
 
@@ -51,13 +53,13 @@ mock for 60 s after three consecutive API failures, so the demo never stalls.
 |---|---|
 | `npm run dev` / `build` / `start` | Next.js |
 | `npm run lint`, `npm run typecheck`, `npm test` | ESLint, `tsc`, Vitest unit tests |
-| `npm run e2e` | Builds, then runs Playwright e2e against `next start` in mock mode (port 3100) |
+| `npm run e2e` | Builds, then runs Playwright e2e against `next start` in mock mode (port 3100, plus 3101 with the meeting bot on) |
 | `npm run test-model` | One-shot connectivity check against the live model |
 | `npm run eval` | Runs the check prompt on `evals/check-cases.json` against the live model (target ≥ 8/10, no false positives). `-- --mock` scores the offline engine |
 
 ## How it works
 
-- **Transcript sources** (`src/lib/transcript/sources`): Web Speech microphone, pasted text, and the scripted sample workshop (replayed at ~150 wpm with 1×/1.5×/3× speed).
+- **Transcript sources** (`src/lib/transcript/sources`): Web Speech microphone, pasted text, the scripted sample workshop (replayed at ~150 wpm with 1×/1.5×/3× speed), and an optional Google Meet bot (`ENABLE_MEET_BOT=1`).
 - **Scheduler** (`src/lib/brain/scheduler.ts`): checks every 30 s when ≥ 40 new words arrived (15 s in the sample), one in flight, at most one auto flag per 2 min (45 s in the sample), never the same framework twice in 10 min.
 - **API routes**: `/api/check` (would a framework help now?), `/api/fill` (pre-fill the chosen framework), `/api/health`. Every model reply is validated with zod; evidence quotes are verified against the transcript and dropped if invented.
 - **Board**: Excalidraw. AI stickies are provisional (amber, dashed) until the facilitator moves, edits or keeps them.

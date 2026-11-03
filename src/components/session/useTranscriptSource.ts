@@ -52,7 +52,7 @@ export function useTranscriptSource(store: ConsoleStore, opts: { createBotSource
       case "paste":
         return createPasteSource(source.pasteText ?? "", { speed: source.speed ?? 2, startAtMs: source.positionMs, instant: source.instant });
       case "bot":
-        return botFactory ? botFactory() : new BotSource();
+        return botFactory ? botFactory() : new BotSource(source.meetUrl ?? "", { startAtMs: source.positionMs });
       case "mic":
       default:
         return new MicSource({ lang: source.lang ?? "en-GB", startAtMs: source.positionMs, deviceId: source.deviceId });

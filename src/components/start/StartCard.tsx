@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { getAllFrameworks } from "@/lib/frameworks/registry";
+import { meetCode } from "@/lib/bot/types";
 import { BUILTIN_FRAMEWORKS } from "@/lib/frameworks/builtins";
 import { SAMPLE_SESSION_NAME } from "@/lib/transcript/sampleScript";
 import { listMicrophones, startLevelMeter } from "@/lib/transcript/level";
@@ -231,8 +232,8 @@ export function StartCard({ meetBotEnabled = false }: { meetBotEnabled?: boolean
           <div className="flex flex-col gap-1.5 border-t border-hairline pt-5 text-[13px] text-ink-muted">
             Join an online call
             <div className="flex gap-2">
-              <Input value={meetUrl} onChange={(e) => setMeetUrl(e.target.value)} placeholder="https://meet.google.com/abc-defg-hij" className="h-9 text-[14px] text-ink" />
-              <Button variant="outline" className="h-9" onClick={startBot} disabled={!/^https:\/\/meet\.google\.com\//.test(meetUrl)}>
+              <Input value={meetUrl} onChange={(e) => setMeetUrl(e.target.value)} placeholder="https://meet.google.com/abc-defg-hij" className="h-9 text-[14px] text-ink" aria-label="Google Meet link" data-testid="meet-url" />
+              <Button variant="outline" className="h-9" onClick={startBot} disabled={!meetCode(meetUrl)} data-testid="join-call">
                 Join a call
               </Button>
             </div>
