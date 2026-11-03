@@ -6,3 +6,7 @@
 - [M0] Model client: openai SDK with maxRetries 0 and our own retry policy (one transient retry after 2s, one 400 → plain-JSON retry), plus a small circuit breaker (3 failures → mock for 60s).
 - [M0] .env.local has MODEL_ID=muse-spark-1.3 (newer than plan's 1.1); used as-is.
 - [M0] CLI scripts load .env.local with a tiny loader (scripts/load-env.ts) rather than adding dotenv.
+- [M1] Theme via next-themes with `attribute="data-theme"` (matches the plan's `[data-theme='dark']` tokens); Tailwind `dark:` variant mapped to the same attribute.
+- [M1] shadcn semantic vars (`--primary`, `--border`, …) are defined in terms of the §8 tokens, so restyling is central rather than per component. Added a `danger` button variant for Stop.
+- [M1] Added derived tokens `--signal-ink` (amber text readable on paper) and `--flag-shadow` (the single on-screen shadow).
+- [M1] Dev indicator disabled so screenshots stay clean.

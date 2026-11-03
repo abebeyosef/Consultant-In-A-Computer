@@ -1,0 +1,29 @@
+/* Design tokens — "a good consultant's notebook" (BUILD_PLAN §8.1) */
+:root,
+[data-theme='light'] {
+  --bg: #F8F7F3; --surface: #FFFFFF; --ink: #17191D; --ink-muted: #5E6470;
+  --hairline: rgba(0,0,0,.08); --accent: #2F45D8; --signal: #E8A317;
+  --signal-tint: rgba(232,163,23,.12); --live: #1F9D61; --danger: #C8372D;
+  --radius-sm: 8px; --radius-md: 12px; --space: 4px;
+  --font-ui: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-mono-stack: var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(.2,.8,.2,1); --dur: 180ms;
+
+  /* derived, still token-based */
+  --surface-sunken: #F1EFE9;
+  --signal-ink: #8A5A00;           /* amber text with ≥4.5:1 on paper */
+  --accent-ink: #FFFFFF;
+  --flag-shadow: 0 1px 2px rgba(23,25,29,.06), 0 8px 24px -8px rgba(23,25,29,.18);
+  color-scheme: light;
+}
+[data-theme='dark'] {
+  --bg: #101114; --surface: #17191E; --ink: #ECEDEF; --ink-muted: #9BA1AC;
+  --hairline: rgba(255,255,255,.08); --accent: #7D8CFF; --signal: #F2B84B;
+  --signal-tint: rgba(242,184,75,.16); --live: #3CCB86; --danger: #F0675D;
+
+  --surface-sunken: #0C0D10;
+  --signal-ink: #F2B84B;
+  --accent-ink: #0E1020;
+  --flag-shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -10px rgba(0,0,0,.6);
+  color-scheme: dark;
+}

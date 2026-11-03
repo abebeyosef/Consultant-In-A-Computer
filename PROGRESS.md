@@ -1,12 +1,12 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-02 23:58
+Last updated: 2026-11-03 00:06
 Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 
 | Milestone | Status | Notes |
 |---|---|---|
 | M0 | DONE | build green; `npm run test-model` OK live; /api/health returns JSON |
-| M1 | IN_PROGRESS | next: tokens, fonts, styleguide |
-| M2 | TODO | |
+| M1 | DONE | tokens, fonts, themed shadcn, Spark, pill, flag card, /styleguide screenshots reviewed |
+| M2 | IN_PROGRESS | next: framework types + builtins + renderers |
 | M3 | TODO | |
 | M4 | TODO | |
 | M5 | TODO | |
@@ -20,7 +20,7 @@ Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 | M13 | TODO | |
 
 ## Next action
-M1: tokens.css, Inter/JetBrains fonts, restyle shadcn, theme toggle, Spark icon, /styleguide, screenshots.
+M2: framework types/zod, 10 builtins, 4 layout renderers → Excalidraw skeletons, /library preview, unit tests.
 
 ## Blocked / fallbacks
 - none yet
