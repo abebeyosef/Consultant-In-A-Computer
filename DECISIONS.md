@@ -47,3 +47,9 @@
 - [M7] `npm run e2e` builds first and runs `next start` with MOCK_MODE=1 on port 3100 (deterministic, no API spend).
 - [M7] Eval cases are scored on the live model; mock engine scores 5/10 on them (it's tuned for the sample + paste paths) — acceptable since mock is a fallback. `npm run eval -- --mock` shows it.
 - [M7] No prompt changes needed: live eval scored 10/10 with zero false positives on the first run.
+- [M8] One BroadcastChannel per session (`ciac-room-<id>`); the console is the source of truth and answers the room's `hello` with a full snapshot; on console load it sends `ping` so an already-open room re-syncs (avoids a hello/snapshot loop).
+- [M8] Room viewport follows the facilitator's visible rectangle clipped to the board's bounds (+3%), so a zoomed-out console doesn't shrink the projector view, while zooming into a corner is still followed exactly.
+- [M8] Room hides provisional AI items *and* ghost labels (reuses `acceptedOnly`). Send to room opens the room window if none is connected.
+- [M8] B (blank) and J (captions, Room mode only) work over the board too — Excalidraw binds neither key. D toggles "dim room" inside the room window (plus a hover-revealed button).
+- [M8] Room forces its own theme via a `data-theme` wrapper (light default), independent of the console's theme.
+- [M8] Top-bar room status: "Open room view" until a room exists, then a menu button outlined green while a board is showing ("In the room"), with blank/captions/stop-showing items.

@@ -24,6 +24,7 @@ export function ExcalidrawCanvas({
   initialElements,
   theme,
   viewMode = false,
+  room = false,
   onApi,
   onChange,
   className,
@@ -31,16 +32,19 @@ export function ExcalidrawCanvas({
   initialElements: readonly ExElement[];
   theme: "light" | "dark";
   viewMode?: boolean;
+  /** projector: no UI at all, follows the console */
+  room?: boolean;
   onApi?: (api: ExcalidrawImperativeAPI) => void;
   onChange?: (elements: readonly ExElement[], appState: AppState) => void;
   className?: string;
 }) {
   return (
-    <div className={`ciac-board relative h-full w-full ${viewMode ? "ciac-board--view" : ""} ${className ?? ""}`}>
+    <div className={`ciac-board relative h-full w-full ${viewMode ? "ciac-board--view" : ""} ${room ? "ciac-board--room" : ""} ${className ?? ""}`}>
       <Excalidraw
         excalidrawAPI={onApi}
         theme={theme}
-        viewModeEnabled={viewMode}
+        viewModeEnabled={viewMode || room}
+        zenModeEnabled={room}
         detectScroll
         initialData={{
           elements: initialElements as never,

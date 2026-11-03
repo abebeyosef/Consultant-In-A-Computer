@@ -33,6 +33,16 @@ you want the guaranteed-offline version: set `MOCK_MODE=1`).
 2. Tick **Process instantly** for an immediate result, or leave it paced to watch flags arrive.
 3. Open the flag's board as above.
 
+## 4. Room view (projector)
+
+1. Top bar → **Open room view** (drag that window to the projector), or just click
+   **Send to room** on a board — it opens the room window if needed.
+2. The room shows a calm holding screen (session name + listening state) until you send.
+3. On a board, **Send to room**: the room shows only kept (solid) items — amber AI
+   suggestions stay private until you accept them. Pan/zoom on your board and the room follows.
+4. **B** blanks the room (again to restore). In Room mode (start-card switch), **J** shows live captions.
+5. In the room window, **D** (or the hover button bottom-right) toggles "dim room".
+
 ## Keyboard shortcuts
 
 | Key | Action |
@@ -42,6 +52,9 @@ you want the guaranteed-offline version: set `MOCK_MODE=1`).
 | F | Focus mode (hide transcript, keep the pill and flags) |
 | ⌘K or / | Open any framework from the library, pre-filled from the transcript |
 | Esc | Deselect on the board, then back to the transcript |
+| B | Blank / unblank the room view |
+| J | Room captions on/off (Room mode) |
+| D | Dim room (in the room window) |
 
 ## If something fails
 

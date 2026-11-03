@@ -1,5 +1,5 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-03 04:00
+Last updated: 2026-11-03 04:20
 Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s; fills 11–50s (minimal effort, hedged after 10s)
 
 | Milestone | Status | Notes |
@@ -12,15 +12,15 @@ Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s
 | M5 | DONE | check/fill routes, prompts, mock engine (canned sample fills), scheduler (2 profiles), evidence check; sample fires VF→SH→BBP in mock and live |
 | M6 | DONE | flag card, arrival, pill dot, Not now, mute, Earlier, quote scroll + underline, Preparing timer → auto-open; verified live (qa/tools/rail-check.mjs) |
 | M7 | DONE | e2e 5/5 (mock); live eval 10/10, 0 false positives, median 5.8s; live sample 3 flags in order; README + DEMO draft; tag v0.1-night1 |
-| M8 | IN_PROGRESS | next: room view |
-| M9 | TODO | |
+| M8 | DONE | /room + BroadcastChannel bridge, Send to room (accepted only), follow pan/zoom (clipped to board), B blank, J captions, dim room, status menu; e2e room.spec (2) green |
+| M9 | IN_PROGRESS | next: board switcher, session summary, QA at 1280×800 + 1728×1117 |
 | M10 | TODO | |
 | M11 | TODO | |
 | M12 | TODO | |
 | M13 | TODO | |
 
 ## Next action
-M8: /room window + lib/room/bridge.ts (BroadcastChannel: board, viewport, blank, hold, captions; room requests state on load), Send to room (accepted only), follow pan/zoom, B blank, J captions, dim-room toggle, room status in top bar; e2e spec.
+M9: board switcher (session boards) in board header, session summary panel, packing/ghost label polish, reduced-motion + focus states check, empty/error states; screenshot QA at 1280×800 and 1728×1117. Consider larger sticky text for projector readability.
 
 ## Blocked / fallbacks
 - none yet

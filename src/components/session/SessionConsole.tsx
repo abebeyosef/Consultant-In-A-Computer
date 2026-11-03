@@ -13,6 +13,7 @@ import { loadSession } from "@/lib/session/storage";
 import { BoardHost } from "./BoardHost";
 import { ConsoleContext, useConsole } from "./ConsoleContext";
 import { ConsoleLayout } from "./ConsoleLayout";
+import { RoomControls } from "./RoomControls";
 import { FlagRail } from "./FlagRail";
 import { FocusMode } from "./FocusMode";
 import { ShortcutBar, type Shortcut } from "./ShortcutBar";
@@ -20,6 +21,7 @@ import { TopBar } from "./TopBar";
 import { TranscriptView } from "./TranscriptView";
 import { useBrain } from "./useBrain";
 import { useTranscriptSource } from "./useTranscriptSource";
+import { RoomContext, useRoomBridge } from "./useRoomBridge";
 
 export function SessionConsole({ id }: { id: string }) {
   const [store, setStore] = useState<ConsoleStore | null>(null);
@@ -68,6 +70,7 @@ function Console({ store }: { store: ConsoleStore }) {
   const frameworks = useMemo(() => getAllFrameworks(), []);
   const fwMap = useMemo(() => new Map(frameworks.map((f) => [f.id, f])), [frameworks]);
   const brain = useBrain(store, frameworks, source.now);
+  const room = useRoomBridge(store);
   const autoStarted = useRef(false);
 
   // ?start=1 → begin immediately (the click happened on the start card), then drop the flag.
@@ -112,20 +115,28 @@ function Console({ store }: { store: ConsoleStore }) {
     return () => window.removeEventListener("keydown", onKey, { capture: true });
   }, [store, markMoment]);
 
+  const roomKeys: Shortcut[] = room.connected
+    ? [
+        { keys: ["B"], label: room.blank ? "Unblank room" : "Blank room" },
+        ...(room.captionsAvailable ? [{ keys: ["J"], label: room.captions ? "Hide captions" : "Captions" }] : []),
+      ]
+    : [];
   const shortcuts: Shortcut[] =
     view.kind === "board"
       ? [
           { keys: ["Esc"], label: "Back to transcript" },
           { keys: ["⌘", "K"], label: "Frameworks" },
+          ...roomKeys,
         ]
       : [
           { keys: ["M"], label: "Mark moment" },
           { keys: ["F"], label: focus ? "Show transcript" : "Focus" },
           { keys: ["⌘", "K"], label: "Frameworks" },
+          ...roomKeys,
         ];
 
   return (
-    <>
+    <RoomContext.Provider value={room}>
       <ConsoleLayout
         topBar={
           <TopBar
@@ -133,6 +144,7 @@ function Console({ store }: { store: ConsoleStore }) {
             onResume={() => void source.start()}
             onStop={source.stop}
             onSpeed={source.setSpeed}
+            roomControls={<RoomControls room={room} />}
           />
         }
         main={
@@ -171,6 +183,6 @@ function Console({ store }: { store: ConsoleStore }) {
         }
       />
       <FrameworkCommand open={cmdOpen} onOpenChange={setCmdOpen} frameworks={frameworks} onSelect={(fw) => void brain.openFramework(fw)} />
-    </>
+    </RoomContext.Provider>
   );
 }

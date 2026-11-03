@@ -165,6 +165,8 @@
 .ciac-board .excalidraw .ToolIcon__keybinding {
   display: none !important;
 }
+.ciac-board--room .excalidraw .layer-ui__wrapper,
+.ciac-board--room .excalidraw .App-menu,
 .ciac-board--view .excalidraw .layer-ui__wrapper__footer,
 .ciac-board--view .excalidraw .App-menu_top {
   display: none !important;

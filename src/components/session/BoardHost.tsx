@@ -1,10 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { BoardPanel } from "@/components/board/BoardPanel";
+import { SendToRoom } from "@/components/board/SendToRoom";
 import { type StoredBoard, loadBoard, saveBoard } from "@/lib/board/store";
 import { matchQuoteToSegments } from "@/lib/brain/evidence";
+import type { RoomViewport } from "@/lib/room/bridge";
 import { useConsole, useConsoleStore } from "./ConsoleContext";
+import { useRoom } from "./useRoomBridge";
 
 /** The board panel inside the console (takes over the transcript column). */
 export function BoardHost({
@@ -12,23 +15,46 @@ export function BoardHost({
   animateIn,
   autoFill,
   onRefill,
-  headerRight,
 }: {
   boardId: string;
   animateIn?: boolean;
   autoFill?: boolean;
   onRefill?: (b: StoredBoard) => Promise<StoredBoard | null>;
-  headerRight?: React.ReactNode;
 }) {
   const store = useConsoleStore();
+  const room = useRoom();
   const closeBoard = useConsole((s) => s.closeBoard);
   const [board] = useState(() => loadBoard(boardId));
+  const latest = useRef(board);
   const showQuote = useMemo(
     () => (quote: string) => {
       const ids = matchQuoteToSegments(quote, store.getState().session.segments);
       if (ids.length) store.getState().scrollTo(ids);
     },
     [store],
+  );
+  const onBoardChange = useCallback(
+    (b: StoredBoard) => {
+      latest.current = b;
+      saveBoard(b);
+      room?.boardSaved(b);
+    },
+    [room],
+  );
+  const onViewport = useCallback((v: RoomViewport) => room?.viewport(boardId, v), [room, boardId]);
+  const refill = useMemo(
+    () =>
+      onRefill
+        ? async (b: StoredBoard) => {
+            const next = await onRefill(b);
+            if (next) {
+              latest.current = next;
+              room?.boardSaved(next);
+            }
+            return next;
+          }
+        : undefined,
+    [onRefill, room],
   );
   if (!board) {
     return <p className="grid flex-1 place-items-center text-[14px] text-ink-muted">That board couldn&apos;t be found.</p>;
@@ -38,11 +64,14 @@ export function BoardHost({
       board={board}
       animateIn={animateIn}
       autoFill={autoFill}
-      onBoardChange={saveBoard}
+      onBoardChange={onBoardChange}
       onClose={closeBoard}
-      onRefill={onRefill}
+      onRefill={refill}
       onShowQuote={showQuote}
-      headerRight={headerRight}
+      onViewport={onViewport}
+      headerRight={
+        room ? <SendToRoom inRoom={room.roomBoardId === boardId} onSend={() => latest.current && room.send(latest.current)} /> : null
+      }
     />
   );
 }
