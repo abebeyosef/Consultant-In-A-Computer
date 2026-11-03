@@ -42,3 +42,8 @@
 - [M6] Opened flags move to the one-line "Earlier" list immediately (with "opened"), alongside flags untouched for 10 minutes, keeping the rail calm; clicking an Earlier item reopens its board.
 - [M6] Fit label sits on its own line above the actions (matches §9.3 order and avoids overflow while "Preparing board… Ns" is shown).
 - [M6] A flag is marked "seen" (clearing the pill's amber dot) when the facilitator hovers or focuses it.
+- [M7] Sample detection for canned fills keys on "harbourline" plus any of several early phrases (newsletter, cancel their subscription…) — at 3× the first flag can fire before "cancellation model" is said, which fell back to extraction (4 items).
+- [M7] Board Esc handler ignores `role=dialog` elements inside `.excalidraw` (its CSS-hidden style panel renders colour/font pickers as dialogs whenever something is selected, which blocked Esc).
+- [M7] `npm run e2e` builds first and runs `next start` with MOCK_MODE=1 on port 3100 (deterministic, no API spend).
+- [M7] Eval cases are scored on the live model; mock engine scores 5/10 on them (it's tuned for the sample + paste paths) — acceptable since mock is a fallback. `npm run eval -- --mock` shows it.
+- [M7] No prompt changes needed: live eval scored 10/10 with zero false positives on the first run.

@@ -9,7 +9,7 @@
     "lint": "eslint",
     "typecheck": "next typegen >/dev/null && tsc --noEmit",
     "test": "vitest run",
-    "e2e": "playwright test",
+    "e2e": "next build >/dev/null && playwright test",
     "eval": "tsx scripts/eval-check.ts",
     "test-model": "tsx scripts/test-model.ts",
     "postinstall": "node scripts/copy-excalidraw-assets.mjs"

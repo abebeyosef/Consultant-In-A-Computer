@@ -1,0 +1,52 @@
+[
+  {
+    "id": "vf-1",
+    "expect": "value-feasibility",
+    "text": "We've got five AI use cases on the wall now: invoice matching, a supplier risk score, contract search, demand forecasting and a procurement assistant. Contract search would save legal a lot of time, but our contracts are scanned PDFs, so I'm not sure it's even doable. Demand forecasting is the big prize for the business. The question is which of these we can realistically deliver with the data we have."
+  },
+  {
+    "id": "vf-2",
+    "expect": "value-feasibility",
+    "text": "So which opportunities do we actually pursue next year? Remote monitoring for the clinics is clearly the most valuable, but the device integration looks really hard. A triage app is easier to build but I'm less sure patients would get much out of it. The analytics dashboard is low value, honestly, but we already have everything we need to do it."
+  },
+  {
+    "id": "ie-1",
+    "expect": "impact-effort",
+    "text": "Let's go through the backlog from the onboarding review. Fixing the broken password reset email would take an afternoon and it's causing most of the support tickets. Rewriting the whole sign-up flow would help, but that's a two-month job. Changing the button colour is quick but nobody thinks it matters. What are the quick wins we can ship this sprint?"
+  },
+  {
+    "id": "ie-2",
+    "expect": "impact-effort",
+    "text": "We have about a dozen fixes from the store audit. Some of them are low-hanging fruit, like moving the returns desk sign, which takes ten minutes. Others, like retraining every till operator, would take weeks of effort. I want to sort the list by how much difference each one makes against how long it would take, so the team knows what to do first."
+  },
+  {
+    "id": "swot-1",
+    "expect": "swot",
+    "text": "Before we set targets, let's be honest about where we stand as a business. Our strength is the engineering team and the reputation we've built with hospitals. Our weakness is that we only sell in one country and our sales team is tiny. There's a real opportunity with the new funding for digital health in Europe. And the threat is the two big platforms moving into our space with deeper pockets."
+  },
+  {
+    "id": "swot-2",
+    "expect": "swot",
+    "text": "The board wants an honest picture of the bakery chain's position. We're great at quality and people love the brand locally. But our costs are high and we have no online ordering at all. The market is shifting towards delivery, which could be a big opening for us, while supermarkets are copying our premium range and undercutting us on price."
+  },
+  {
+    "id": "sh-1",
+    "expect": "stakeholder-map",
+    "text": "This migration will fail unless we get the right people on side. The finance director has to sign off the budget, and she's sceptical. The warehouse managers will be the ones using it every day and they're worried about their jobs. IT security can block the whole thing if they're not happy. Then there are the regional sales leads, who are keen but don't really have a say. Who do we need to bring in early?"
+  },
+  {
+    "id": "sh-2",
+    "expect": "stakeholder-map",
+    "text": "For the new parking policy we need a plan for who to involve. The council leader has the final say but hasn't shown much interest yet. Local shop owners care a lot and they're very vocal. Residents' groups are interested but have no formal veto. The transport authority controls the funding, and the press will pick it up at some point."
+  },
+  {
+    "id": "none-1",
+    "expect": "none",
+    "text": "Okay, can everyone hear me at the back? Great. Lunch is at half twelve in the atrium, and there's coffee on the side if you need it. The wifi password is on the card on your table. We'll start properly in about five minutes once Sam has found the clicker."
+  },
+  {
+    "id": "none-2",
+    "expect": "none",
+    "text": "So that's settled, we're going with the London office for the launch, everyone agreed last week and the lease is signed. Jamie will send the move schedule round on Friday. Thanks all, I think we can wrap up a few minutes early today."
+  }
+]

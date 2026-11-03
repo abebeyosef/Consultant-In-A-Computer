@@ -150,7 +150,7 @@ export function mockCheck(req: Pick<CheckRequest, "window" | "marked" | "catalog
 
 /* ---------- fill ---------- */
 
-const SAMPLE_MARKERS = ["harbourline", "cancellation model", "podcast network"];
+const SAMPLE_MARKERS = ["harbourline", "morning newsletter", "cancel their subscription", "cancellation model", "podcast network"];
 
 export function looksLikeSample(transcript: SegmentLite[]): boolean {
   const t = normalise(transcript.map((s) => s.text).join(" "));

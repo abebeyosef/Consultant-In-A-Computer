@@ -287,14 +287,23 @@ export function BoardPanel({
     if (!onClose) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape" || e.defaultPrevented) return;
-      if (document.querySelector("[role=dialog]")) return;
+      // App dialogs (⌘K etc.) own Esc; Excalidraw's hidden style panel also renders role=dialog pickers, ignore those.
+      const appDialog = [...document.querySelectorAll("[role=dialog]")].some((d) => !d.closest(".excalidraw"));
+      if (appDialog) return;
       const t = e.target as HTMLElement | null;
       if (t && (t.tagName === "TEXTAREA" || t.tagName === "INPUT" || t.isContentEditable)) return;
-      const st = apiRef.current?.getAppState();
-      if (st) {
-        const hasSel = Object.keys(st.selectedElementIds ?? {}).length > 0;
-        if (hasSel || st.editingTextElement || st.newElement || st.openMenu || st.openPopup || st.openDialog) return;
-        if (st.activeTool?.type && st.activeTool.type !== "selection") return;
+      const api = apiRef.current;
+      const st = api?.getAppState();
+      if (api && st) {
+        if (st.editingTextElement || st.newElement || st.openMenu || st.openPopup || st.openDialog) return;
+        if (st.activeTool?.type && st.activeTool.type !== "selection") return; // Excalidraw resets the tool
+        if (Object.keys(st.selectedElementIds ?? {}).length > 0) {
+          // First Esc deselects; the next one goes back to the transcript.
+          e.preventDefault();
+          e.stopPropagation();
+          api.updateScene({ appState: { selectedElementIds: {}, selectedGroupIds: {} } as never });
+          return;
+        }
       }
       onClose();
     };
