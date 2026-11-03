@@ -48,3 +48,4 @@ last-run.log
 /qa/screenshots/*.png
 !.env.example
 /public/excalidraw-assets/
+_to_delete/
