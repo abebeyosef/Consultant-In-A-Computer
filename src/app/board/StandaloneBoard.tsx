@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { BoardPanel } from "@/components/board/BoardPanel";
+import { ShareMenu } from "@/components/board/ShareMenu";
 import { FrameworkCommand } from "@/components/board/FrameworkCommand";
 import { Wordmark } from "@/components/common/SiteHeader";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
@@ -122,7 +123,17 @@ export function StandaloneBoard() {
               saveBoard(b);
             }}
             onClose={() => router.push("/library")}
+            closeLabel="Library"
             onRefill={onRefill}
+            headerRight={
+              <ShareMenu
+                title={board.title}
+                getElements={() =>
+                  ((window as unknown as { __ciacBoardApi?: { getSceneElements(): unknown } }).__ciacBoardApi?.getSceneElements() as typeof board.elements | undefined) ??
+                  board.elements
+                }
+              />
+            }
           />
         ) : missing ? (
           <p className="grid h-full place-items-center text-ink-muted">That board isn&apos;t in this browser.</p>

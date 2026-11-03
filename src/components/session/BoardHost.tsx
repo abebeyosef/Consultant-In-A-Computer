@@ -3,11 +3,15 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { BoardPanel } from "@/components/board/BoardPanel";
 import { BoardSwitcher } from "@/components/board/BoardSwitcher";
+import type { ExcalidrawImperativeAPI } from "@/components/board/ExcalidrawCanvas";
 import { SendToRoom } from "@/components/board/SendToRoom";
+import { ShareMenu } from "@/components/board/ShareMenu";
+import type { ExElement } from "@/lib/board/excalidraw";
 import { type StoredBoard, loadBoard, saveBoard } from "@/lib/board/store";
 import { matchQuoteToSegments } from "@/lib/brain/evidence";
 import type { RoomViewport } from "@/lib/room/bridge";
 import { useConsole, useConsoleStore } from "./ConsoleContext";
+import { copySessionNotes } from "./copyNotes";
 import { useRoom } from "./useRoomBridge";
 
 /** The board panel inside the console (takes over the transcript column). */
@@ -29,6 +33,11 @@ export function BoardHost({
   const boardIds = useConsole((s) => s.session.boardIds);
   const [board] = useState(() => loadBoard(boardId));
   const latest = useRef(board);
+  const api = useRef<ExcalidrawImperativeAPI | null>(null);
+  const getElements = useCallback(
+    () => (api.current?.getSceneElements() as unknown as readonly ExElement[] | undefined) ?? latest.current?.elements ?? [],
+    [],
+  );
   const showQuote = useMemo(
     () => (quote: string) => {
       const ids = matchQuoteToSegments(quote, store.getState().session.segments);
@@ -72,8 +81,12 @@ export function BoardHost({
       onRefill={refill}
       onShowQuote={showQuote}
       onViewport={onViewport}
+      onApiReady={(a) => {
+        api.current = a;
+      }}
       headerRight={
         <>
+          <ShareMenu title={board.title} getElements={getElements} onCopyNotes={() => copySessionNotes(store)} />
           <BoardSwitcher boardIds={boardIds} currentId={boardId} roomBoardId={room?.roomBoardId} onSelect={(id) => openBoard(id)} />
           {room ? <SendToRoom inRoom={room.roomBoardId === boardId} onSend={() => latest.current && room.send(latest.current)} /> : null}
         </>

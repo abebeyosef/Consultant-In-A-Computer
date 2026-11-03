@@ -58,3 +58,7 @@
 - [M9] Provisional bar never wraps: below 1360px viewport it shortens to "Clear" / "Re-fill" (aria-labels keep the full names).
 - [M9] Sticky font size left as-is (16px): bigger text would make Excalidraw grow sticky heights and break the guaranteed non-overlap; the room view instead zooms to the board's bounds.
 - [M9] Packing, re-fill merge, ghost labels and reduced motion were already done in M2/M3/M6; checked, no changes needed.
+- [M10] Share link and PNG carry kept (accepted) items only — AI suggestions stay private, same rule as the room; the .excalidraw download is the full working board.
+- [M10] Share links drop fields Excalidraw restores itself (versionNonce, seed, index…) and slim customData; a matrix board is ~6k chars of URL, fine for Chrome. `/view` stores nothing.
+- [M10] Session notes group kept items under their quadrant/block/cell labels (read from the board's own label elements), list facilitator-drawn items under "Other notes", count unreviewed AI suggestions, and list marked moments. Available from the board's Share menu and the end-of-session summary.
+- [M10] Radix dropdown occasionally ignores a click immediately after a previous item's async action in headless tests; e2e reopens with a retry. Not seen as a user-facing issue.

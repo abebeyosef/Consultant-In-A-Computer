@@ -65,3 +65,34 @@ export async function elementsToSvg(elements: ExElement[], opts: { dark?: boolea
     skipInliningFonts: true,
   });
 }
+
+const BOARD_PAPER = "#f8f7f3";
+
+/** PNG of the given elements on paper, 2× for crisp slides. */
+export async function elementsToPng(elements: readonly ExElement[]): Promise<Blob> {
+  const { exportToBlob } = await loadExcalidraw();
+  return exportToBlob({
+    elements: elements.filter((e) => !e.isDeleted) as never,
+    appState: { exportBackground: true, viewBackgroundColor: BOARD_PAPER, exportWithDarkMode: false, exportScale: 2 },
+    files: null,
+    mimeType: "image/png",
+    exportPadding: 32,
+  });
+}
+
+/** A `.excalidraw` file (opens in excalidraw.com or the desktop app). */
+export async function elementsToExcalidrawJson(elements: readonly ExElement[]): Promise<string> {
+  const { serializeAsJSON } = await loadExcalidraw();
+  return serializeAsJSON(elements.filter((e) => !e.isDeleted) as never, { viewBackgroundColor: BOARD_PAPER }, {}, "local");
+}
+
+export function downloadBlob(blob: Blob, name: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}

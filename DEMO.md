@@ -43,6 +43,12 @@ you want the guaranteed-offline version: set `MOCK_MODE=1`).
 4. **B** blanks the room (again to restore). In Room mode (start-card switch), **J** shows live captions.
 5. In the room window, **D** (or the hover button bottom-right) toggles "dim room".
 
+## 5. Sharing
+
+On any board, **Share** → *Copy read-only link* (opens anywhere, no account; kept items
+only), *Download PNG*, *Download .excalidraw file*, or *Copy session notes* (Markdown).
+After **Stop**, the rail shows a session summary with the same notes button.
+
 ## Keyboard shortcuts
 
 | Key | Action |

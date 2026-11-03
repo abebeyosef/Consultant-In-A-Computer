@@ -44,6 +44,8 @@ export type BoardPanelProps = {
   autoFill?: boolean;
   onBoardChange: (board: StoredBoard) => void;
   onClose?: () => void;
+  /** label of the back button (default "Transcript") */
+  closeLabel?: string;
   /** Re-fill: parent fetches a new fill and returns the merged board */
   onRefill?: (board: StoredBoard) => Promise<StoredBoard | null>;
   onShowQuote?: (quote: string) => void;
@@ -62,6 +64,7 @@ export function BoardPanel({
   autoFill,
   onBoardChange,
   onClose,
+  closeLabel = "Transcript",
   onRefill,
   onShowQuote,
   headerRight,
@@ -317,9 +320,9 @@ export function BoardPanel({
     <section className={cn("relative flex h-full min-h-0 flex-col", className)} aria-label={`${board.title} board`} data-testid="board-panel">
       <header className="flex h-11 shrink-0 items-center gap-2 border-b border-hairline px-3">
         {onClose ? (
-          <Button variant="ghost" size="sm" onClick={onClose} className="gap-1.5 text-ink-muted" aria-label="Back to transcript">
+          <Button variant="ghost" size="sm" onClick={onClose} className="gap-1.5 text-ink-muted" aria-label={`Back to ${closeLabel.toLowerCase()}`}>
             <ArrowLeft strokeWidth={1.5} />
-            <span>Transcript</span>
+            <span>{closeLabel}</span>
             <Kbd className="ml-0.5">Esc</Kbd>
           </Button>
         ) : null}

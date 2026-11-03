@@ -1,14 +1,17 @@
 "use client";
 
-import { LayoutGrid } from "lucide-react";
+import { LayoutGrid, NotebookText } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useMemo } from "react";
 import { loadBoard } from "@/lib/board/store";
 import { summarise } from "@/lib/session/summary";
 import { formatElapsed } from "./ListeningPill";
-import { useConsole } from "./ConsoleContext";
+import { useConsole, useConsoleStore } from "./ConsoleContext";
+import { copySessionNotes } from "./copyNotes";
 
 /** Shown at the top of the rail once a session has ended. */
-export function SessionSummary({ actions }: { actions?: React.ReactNode }) {
+export function SessionSummary() {
+  const store = useConsoleStore();
   const session = useConsole((s) => s.session);
   const clockMs = useConsole((s) => s.clockMs);
   const openBoard = useConsole((s) => s.openBoard);
@@ -53,7 +56,9 @@ export function SessionSummary({ actions }: { actions?: React.ReactNode }) {
       ) : (
         <p className="mt-4 text-[13px] text-ink-muted">No boards were opened.</p>
       )}
-      {actions ? <div className="mt-3 flex flex-wrap gap-2">{actions}</div> : null}
+      <Button variant="outline" size="sm" className="mt-3 w-full" onClick={() => copySessionNotes(store)} data-testid="summary-copy-notes">
+        <NotebookText strokeWidth={1.5} /> Copy session notes
+      </Button>
     </section>
   );
 }
