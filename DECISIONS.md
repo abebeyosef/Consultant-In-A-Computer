@@ -39,3 +39,6 @@
 - [M5] Scheduler skips calling the model when an auto flag couldn't be shown anyway (inside the 2-minute gap), saving calls. Pacing memory is rebuilt from saved suggestions after reload.
 - [M5] Pasted transcripts processed instantly are scanned in ~220-word steps (≤14 checks) on the virtual clock with the default pacing profile.
 - [M5] ⌘K opens the board immediately (empty frame with ghost labels) and fills it from the transcript in place, rather than blocking on the fill.
+- [M6] Opened flags move to the one-line "Earlier" list immediately (with "opened"), alongside flags untouched for 10 minutes, keeping the rail calm; clicking an Earlier item reopens its board.
+- [M6] Fit label sits on its own line above the actions (matches §9.3 order and avoids overflow while "Preparing board… Ns" is shown).
+- [M6] A flag is marked "seen" (clearing the pill's amber dot) when the facilitator hovers or focuses it.

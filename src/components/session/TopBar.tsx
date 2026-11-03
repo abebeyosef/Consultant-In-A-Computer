@@ -62,7 +62,7 @@ export function TopBar({
             className="h-7"
           >
             {[1, 1.5, 3].map((s) => (
-              <ToggleGroupItem key={s} value={String(s)} className="h-7 px-2 font-mono text-[11px]">
+              <ToggleGroupItem key={s} value={String(s)} className="h-7 px-2 font-mono text-[11px] data-[state=on]:bg-ink/10 data-[state=on]:text-ink">
                 {s}×
               </ToggleGroupItem>
             ))}

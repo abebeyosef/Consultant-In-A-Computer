@@ -38,7 +38,6 @@ export function FlagCard({
   quote,
   fit,
   fitHint,
-  manual,
   preparingSeconds,
   opened,
   onOpen,
@@ -94,7 +93,17 @@ export function FlagCard({
             &ldquo;{quote}&rdquo;
           </button>
         ) : null}
-        <div className="flex items-center gap-2 pt-1">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span tabIndex={0} className="w-fit cursor-default text-[12px] text-signal-ink" data-testid="fit-label">
+              {fit === "strong" ? "Strong fit" : "Possible fit"}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent side="left" className="max-w-[240px]">
+            {fitHint ?? "What the model looked for in the conversation."}
+          </TooltipContent>
+        </Tooltip>
+        <div className="flex items-center gap-2">
           <Button size="sm" onClick={onOpen} disabled={preparing} data-testid="open-board" className="min-w-[96px]">
             {preparing ? (
               <span className="inline-flex items-center gap-1.5">
@@ -111,16 +120,6 @@ export function FlagCard({
               Not now
             </Button>
           ) : null}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span tabIndex={0} className="ml-auto cursor-default whitespace-nowrap text-[12px] text-signal-ink">
-                {manual && fit === "possible" ? "Possible fit" : fit === "strong" ? "Strong fit" : "Possible fit"}
-              </span>
-            </TooltipTrigger>
-            <TooltipContent side="left" className="max-w-[240px]">
-              {fitHint ?? "What the model looked for in the conversation."}
-            </TooltipContent>
-          </Tooltip>
         </div>
       </div>
     </motion.article>

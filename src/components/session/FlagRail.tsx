@@ -6,25 +6,12 @@ import { useMemo } from "react";
 import { Spark } from "@/components/common/Spark";
 import { Button } from "@/components/ui/button";
 import type { FrameworkTemplate } from "@/lib/frameworks/types";
+import { partitionSuggestions } from "@/lib/session/rail";
 import type { Suggestion } from "@/lib/session/types";
 import { formatTimestamp } from "@/lib/transcript/store";
 import { useNow } from "@/lib/useNow";
 import { useConsole } from "./ConsoleContext";
 import { FlagCard } from "./FlagCard";
-
-export const EARLIER_AFTER_MS = 10 * 60_000;
-
-export function partitionSuggestions(list: Suggestion[], clockMs: number) {
-  const active: Suggestion[] = [];
-  const earlier: Suggestion[] = [];
-  for (const s of list) {
-    if (s.status === "dismissed") continue;
-    const stale = clockMs - s.createdAt > EARLIER_AFTER_MS && s.status !== "opened";
-    if (s.status === "opened" || stale) earlier.push(s);
-    else active.push(s);
-  }
-  return { active, earlier };
-}
 
 export function FlagRail({
   frameworks,

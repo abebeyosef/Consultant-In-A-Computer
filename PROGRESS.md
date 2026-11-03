@@ -1,5 +1,5 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-03 02:20
+Last updated: 2026-11-03 02:45
 Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s; fills 11–50s (minimal effort, hedged after 10s)
 
 | Milestone | Status | Notes |
@@ -10,8 +10,8 @@ Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s
 | M3 | DONE | BoardPanel (Excalidraw), accept-on-edit, provisional bar, source popover, ⌘K, localStorage; verified with qa/tools/board-*.mjs |
 | M4 | DONE | start card, console, sample/paste replay, mic (Web Speech, unit-tested with a fake), mark, focus, pause/resume, reload restore |
 | M5 | DONE | check/fill routes, prompts, mock engine (canned sample fills), scheduler (2 profiles), evidence check; sample fires VF→SH→BBP in mock and live |
-| M6 | IN_PROGRESS | rail mostly built in M4/M5; next: verify preparing timer, quote scroll, mute, earlier; screenshots |
-| M7 | TODO | |
+| M6 | DONE | flag card, arrival, pill dot, Not now, mute, Earlier, quote scroll + underline, Preparing timer → auto-open; verified live (qa/tools/rail-check.mjs) |
+| M7 | IN_PROGRESS | next: Playwright e2e (mock), eval cases + script, README, DEMO |
 | M8 | TODO | |
 | M9 | TODO | |
 | M10 | TODO | |
@@ -20,7 +20,7 @@ Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s
 | M13 | TODO | |
 
 ## Next action
-M6: verify flag rail behaviours (Preparing board timer, quote click-to-scroll + amber underline, Not now, mute, Earlier collapse), fix issues, screenshots light/dark.
+M7: e2e specs in e2e/ (sample → board, paste → flag, reload restore) against MOCK_MODE build; evals/check-cases.json + scripts/eval-check.ts (live, ≥8/10); README.md + DEMO.md; tag v0.1-night1.
 
 ## Blocked / fallbacks
 - none yet
