@@ -4,7 +4,7 @@ import type { SourceStatus } from "@/lib/transcript/types";
 import { saveSession } from "./storage";
 import type { Session, Suggestion } from "./types";
 
-export type ConsoleView = { kind: "transcript" } | { kind: "board"; boardId: string; animateIn?: boolean };
+export type ConsoleView = { kind: "transcript" } | { kind: "board"; boardId: string; animateIn?: boolean; autoFill?: boolean };
 
 export type ConsoleState = {
   session: Session;
@@ -36,13 +36,14 @@ export type ConsoleActions = {
   updateSuggestion(id: string, patch: Partial<Suggestion>): void;
   mute(frameworkId: string): void;
   addBoard(boardId: string): void;
-  openBoard(boardId: string, animateIn?: boolean): void;
+  openBoard(boardId: string, animateIn?: boolean, autoFill?: boolean): void;
   closeBoard(): void;
   toggleFocus(force?: boolean): void;
   scrollTo(ids: string[]): void;
   setEngineMode(m: ConsoleState["engineMode"]): void;
   setWaiting(w: ConsoleState["waitingFor"]): void;
   setRoomBoard(id: string | null): void;
+  setInstantScanned(): void;
 };
 
 export type ConsoleStore = ReturnType<typeof createConsoleStore>;
@@ -94,13 +95,14 @@ export function createConsoleStore(initial: Session) {
           suggestions: s.suggestions.map((x) => (x.frameworkId === fid && x.status !== "opened" ? { ...x, status: "dismissed" } : x)),
         })),
       addBoard: (bid) => patchSession((s) => ({ boardIds: s.boardIds.includes(bid) ? s.boardIds : [...s.boardIds, bid] })),
-      openBoard: (boardId, animateIn) => set({ view: { kind: "board", boardId, animateIn }, focus: false }),
+      openBoard: (boardId, animateIn, autoFill) => set({ view: { kind: "board", boardId, animateIn, autoFill }, focus: false }),
       closeBoard: () => set({ view: { kind: "transcript" } }),
       toggleFocus: (force) => set((st) => ({ focus: force ?? !st.focus })),
       scrollTo: (ids) => set({ scrollTarget: { ids, nonce: Date.now() }, view: { kind: "transcript" }, focus: false }),
       setEngineMode: (m) => set({ engineMode: m }),
       setWaiting: (w) => set({ waitingFor: w }),
       setRoomBoard: (id) => patchSession({ roomBoardId: id }),
+      setInstantScanned: () => patchSession({ instantScanned: true }),
     };
   });
 

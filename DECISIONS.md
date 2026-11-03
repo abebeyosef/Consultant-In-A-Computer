@@ -31,3 +31,11 @@
 - [M4] Start listening calls getUserMedia in the click handler (prompt appears right after the click), then navigates to the console which starts recognition. The start card shows the live level only if mic permission was already granted.
 - [M4] Source cleanup is deferred a tick so React StrictMode's simulated unmount doesn't stop a running source.
 - [M4] `typecheck` runs `next typegen` first so `PageProps<'/session/[id]'>` route types exist without a build.
+- [M5] Mock engine: stemmed signal-phrase scoring (multi-word phrases weigh more), thresholds strong ≥ 4.5 / possible ≥ 2, plus "prefer" rules (build-buy-partner over options-appraisal, value-feasibility over impact-effort when close). Calibrated so the sample fires VF → stakeholder → BBP (unit test asserts order and timing).
+- [M5] Fills use `reasoning_effort: "minimal"` (plan said medium): Muse Spark spent 3–6k reasoning tokens and 20–50s at low/medium; minimal keeps quality on the sample. Checks stay at "low".
+- [M5] Fill calls are hedged: a second identical request goes out if the first hasn't answered after 10s; first success wins. 40s per-call cap, then mock (canned for the sample).
+- [M5] Fill prompt now says to include every option the room named (score 3 when no view given) — the first prompt dropped half the sample's ideas.
+- [M5] Model reasons are sanitised: first sentence only, 4–22 words, no repeated 3-word phrases — otherwise the framework's plain template reason is used (Muse Spark sometimes produced run-on/repeating reasons).
+- [M5] Scheduler skips calling the model when an auto flag couldn't be shown anyway (inside the 2-minute gap), saving calls. Pacing memory is rebuilt from saved suggestions after reload.
+- [M5] Pasted transcripts processed instantly are scanned in ~220-word steps (≤14 checks) on the virtual clock with the default pacing profile.
+- [M5] ⌘K opens the board immediately (empty frame with ghost labels) and fills it from the transcript in place, rather than blocking on the fill.

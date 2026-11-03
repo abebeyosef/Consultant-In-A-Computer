@@ -40,6 +40,8 @@ export type BoardPanelProps = {
   board: StoredBoard;
   /** play the one-by-one arrival of AI items (only for freshly created boards) */
   animateIn?: boolean;
+  /** fill from the transcript as soon as the board opens (⌘K) */
+  autoFill?: boolean;
   onBoardChange: (board: StoredBoard) => void;
   onClose?: () => void;
   /** Re-fill: parent fetches a new fill and returns the merged board */
@@ -57,6 +59,7 @@ export type BoardPanelProps = {
 export function BoardPanel({
   board,
   animateIn,
+  autoFill,
   onBoardChange,
   onClose,
   onRefill,
@@ -79,6 +82,8 @@ export function BoardPanel({
   const [aiTotal, setAiTotal] = useState(() => board.elements.filter((e) => isAiSticky(e as El)).length);
   const [popover, setPopover] = useState<Popover>(null);
   const [refilling, setRefilling] = useState(false);
+  const [apiReady, setApiReady] = useState(false);
+  const autoFilled = useRef(false);
 
   // Initial elements: when animating in, start with structure only.
   const { initial, queued } = useMemo(() => {
@@ -150,6 +155,7 @@ export function BoardPanel({
     (api: ExcalidrawImperativeAPI) => {
       if (apiRef.current === api) return;
       apiRef.current = api;
+      setApiReady(true);
       // test/debug hook (used by Playwright to locate elements on the canvas)
       (window as unknown as { __ciacBoardApi?: ExcalidrawImperativeAPI }).__ciacBoardApi = api;
       onApiReady?.(api);
@@ -265,6 +271,16 @@ export function BoardPanel({
       setRefilling(false);
     }
   }, [onRefill]);
+
+  // ⌘K boards: fill from the transcript as soon as the canvas is ready.
+  useEffect(() => {
+    if (!autoFill || !apiReady || autoFilled.current) return;
+    const t = setTimeout(() => {
+      autoFilled.current = true;
+      void refill();
+    }, 120);
+    return () => clearTimeout(t);
+  }, [autoFill, apiReady, refill]);
 
   // Esc returns to the transcript — but only when Excalidraw has nothing to cancel.
   useEffect(() => {

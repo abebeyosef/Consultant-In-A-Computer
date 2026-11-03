@@ -137,7 +137,7 @@ function Console({ store }: { store: ConsoleStore }) {
         }
         main={
           view.kind === "board" ? (
-            <BoardHost key={view.boardId} boardId={view.boardId} animateIn={view.animateIn} onRefill={brain.refillBoard} />
+            <BoardHost key={view.boardId} boardId={view.boardId} animateIn={view.animateIn} autoFill={view.autoFill} onRefill={brain.refillBoard} />
           ) : focus ? (
             <FocusMode />
           ) : (

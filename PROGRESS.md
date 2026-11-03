@@ -1,6 +1,6 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-03 01:25
-Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
+Last updated: 2026-11-03 02:20
+Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s; fills 11–50s (minimal effort, hedged after 10s)
 
 | Milestone | Status | Notes |
 |---|---|---|
@@ -9,8 +9,8 @@ Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 | M2 | DONE | 10 templates, 4 renderers (pure skeletons), /library SVG previews, 37 unit tests |
 | M3 | DONE | BoardPanel (Excalidraw), accept-on-edit, provisional bar, source popover, ⌘K, localStorage; verified with qa/tools/board-*.mjs |
 | M4 | DONE | start card, console, sample/paste replay, mic (Web Speech, unit-tested with a fake), mark, focus, pause/resume, reload restore |
-| M5 | IN_PROGRESS | next: /api/check, /api/fill, prompts, mock engine, scheduler; replace useBrain stub |
-| M6 | TODO | |
+| M5 | DONE | check/fill routes, prompts, mock engine (canned sample fills), scheduler (2 profiles), evidence check; sample fires VF→SH→BBP in mock and live |
+| M6 | IN_PROGRESS | rail mostly built in M4/M5; next: verify preparing timer, quote scroll, mute, earlier; screenshots |
 | M7 | TODO | |
 | M8 | TODO | |
 | M9 | TODO | |
@@ -20,7 +20,7 @@ Model: live (muse-spark-1.3 via api.meta.ai; text ~3.7s, JSON ~4s on smoke test)
 | M13 | TODO | |
 
 ## Next action
-M5: schemas/prompts, /api/check + /api/fill (live + defensive fallback + mock), mock engine with canned sample fills, scheduler (pure, 2 pacing profiles), real useBrain (replace stub in src/components/session/useBrain.ts).
+M6: verify flag rail behaviours (Preparing board timer, quote click-to-scroll + amber underline, Not now, mute, Earlier collapse), fix issues, screenshots light/dark.
 
 ## Blocked / fallbacks
 - none yet

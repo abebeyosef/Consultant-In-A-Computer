@@ -59,7 +59,7 @@ export function ProvisionalBar({
           {onRefill ? (
             <Button size="sm" variant="ghost" onClick={onRefill} disabled={refilling} className="rounded-full">
               <RotateCw strokeWidth={1.5} className={refilling ? "animate-spin" : undefined} />
-              {refilling ? "Re-filling…" : "Re-fill from transcript"}
+              {refilling ? "Filling from transcript…" : "Re-fill from transcript"}
             </Button>
           ) : null}
         </motion.div>

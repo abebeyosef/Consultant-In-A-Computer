@@ -74,8 +74,10 @@ type CallOpts<S extends z.ZodTypeAny> = {
   system: string;
   user: string;
   schema: S;
-  effort: "low" | "medium";
+  effort: "minimal" | "low" | "medium";
   timeoutMs: number;
+  /** "json_schema" (default) sends the zod schema; "json_object" only asks for JSON (often faster) */
+  format?: "json_schema" | "json_object";
 };
 
 /**
@@ -118,10 +120,13 @@ export async function callModelJSON<S extends z.ZodTypeAny>(
         ],
       };
       if (structured && jsonSchema) {
-        body.response_format = {
-          type: "json_schema",
-          json_schema: { name: opts.label.replace(/[^a-zA-Z0-9_-]/g, "_"), schema: jsonSchema, strict: false },
-        };
+        body.response_format =
+          opts.format === "json_object"
+            ? { type: "json_object" }
+            : {
+                type: "json_schema",
+                json_schema: { name: opts.label.replace(/[^a-zA-Z0-9_-]/g, "_"), schema: jsonSchema, strict: false },
+              };
         body.reasoning_effort = opts.effort;
       }
       const res = await client.chat.completions.create(body, { timeout: opts.timeoutMs });
@@ -194,4 +199,36 @@ export async function callModelText(prompt: string, timeoutMs = 20_000): Promise
       latencyMs: Date.now() - t0,
     };
   }
+}
+
+/**
+ * Hedged call: if the first request hasn't answered after `hedgeAfterMs`, send an
+ * identical second one and take whichever succeeds first. Muse Spark latency
+ * varies a lot call to call, so this trims the long tail on fills.
+ */
+export function callModelJSONHedged<S extends z.ZodTypeAny>(
+  opts: CallOpts<S>,
+  hedgeAfterMs: number,
+): Promise<CallResult<z.infer<S>>> {
+  return new Promise((resolve) => {
+    let done = false;
+    let pending = 1;
+    const settle = (r: CallResult<z.infer<S>>) => {
+      done = true;
+      clearTimeout(timer);
+      resolve(r);
+    };
+    // Resolve on the first success, or on failure once nothing else is in flight.
+    const finish = (r: CallResult<z.infer<S>>) => {
+      if (done) return;
+      pending -= 1;
+      if (r.ok || pending === 0) settle(r);
+    };
+    const timer = setTimeout(() => {
+      if (done) return;
+      pending += 1;
+      void callModelJSON({ ...opts, label: `${opts.label}#hedge` }).then(finish);
+    }, hedgeAfterMs);
+    void callModelJSON(opts).then(finish);
+  });
 }

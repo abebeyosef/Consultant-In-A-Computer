@@ -51,4 +51,6 @@ export type Session = {
   status: SessionStatus;
   /** board currently shown in the room (M8) */
   roomBoardId?: string | null;
+  /** pasted transcript processed instantly has been scanned for flags */
+  instantScanned?: boolean;
 };

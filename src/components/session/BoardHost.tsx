@@ -10,11 +10,13 @@ import { useConsole, useConsoleStore } from "./ConsoleContext";
 export function BoardHost({
   boardId,
   animateIn,
+  autoFill,
   onRefill,
   headerRight,
 }: {
   boardId: string;
   animateIn?: boolean;
+  autoFill?: boolean;
   onRefill?: (b: StoredBoard) => Promise<StoredBoard | null>;
   headerRight?: React.ReactNode;
 }) {
@@ -35,6 +37,7 @@ export function BoardHost({
     <BoardPanel
       board={board}
       animateIn={animateIn}
+      autoFill={autoFill}
       onBoardChange={saveBoard}
       onClose={closeBoard}
       onRefill={onRefill}
