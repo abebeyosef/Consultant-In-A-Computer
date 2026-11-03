@@ -13,6 +13,8 @@ export type PacingProfile = {
 export const PACING = {
   default: { checkEveryMs: 30_000, minNewWords: 40, minGapBetweenFlagsMs: 120_000, sameFrameworkCooldownMs: 600_000 },
   demo: { checkEveryMs: 15_000, minNewWords: 40, minGapBetweenFlagsMs: 45_000, sameFrameworkCooldownMs: 600_000 },
+  /** a pasted transcript processed instantly: every distinct framework it calls for, once each */
+  scan: { checkEveryMs: 0, minNewWords: 0, minGapBetweenFlagsMs: 0, sameFrameworkCooldownMs: 24 * 3_600_000 },
 } satisfies Record<string, PacingProfile>;
 
 export type PacingName = keyof typeof PACING;

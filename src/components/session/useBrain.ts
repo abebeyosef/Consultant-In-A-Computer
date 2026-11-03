@@ -297,7 +297,7 @@ export function useBrain(store: ConsoleStore, frameworks: FrameworkTemplate[], n
       if (s.instantScanned) return;
       scanning.current = true;
       void (async () => {
-        const p = PACING.default;
+        const p = PACING.scan;
         const segs = s.segments;
         let words = 0;
         let lastAt = 0;

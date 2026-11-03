@@ -13,6 +13,7 @@
   --surface-sunken: #F1EFE9;
   --signal-ink: #8A5A00;           /* amber text with ≥4.5:1 on paper */
   --accent-ink: #FFFFFF;
+  --danger-ink: #FFFFFF;
   --flag-shadow: 0 1px 2px rgba(23,25,29,.06), 0 8px 24px -8px rgba(23,25,29,.18);
   color-scheme: light;
 }
@@ -24,6 +25,7 @@
   --surface-sunken: #0C0D10;
   --signal-ink: #F2B84B;
   --accent-ink: #0E1020;
+  --danger-ink: #1A0907;
   --flag-shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -10px rgba(0,0,0,.6);
   color-scheme: dark;
 }

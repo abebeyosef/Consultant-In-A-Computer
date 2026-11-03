@@ -1,10 +1,40 @@
-# Demo walkthrough (draft — finalised in M12)
+# Demo walkthrough — Thursday 5 November 2026
 
-Use Chrome, 1440×900 or larger. Run `npm run build && npm start` beforehand and open
-http://localhost:3000. Check `http://localhost:3000/api/health` says `live` (or `mock` if
-you want the guaranteed-offline version: set `MOCK_MODE=1`).
+## Before you go on (5 minutes)
 
-## 1. Sample workshop (main path, ~2 minutes)
+1. Chrome, window at 1440×900 or larger. Second screen/projector mirrored *off* (extended).
+2. `npm run build && npm start` → http://localhost:3000.
+3. `npm run test-model` — prints a reply if the Muse Spark key works. Then open
+   http://localhost:3000/api/health: `live` is the real model; `mock` is the offline engine.
+   If the venue wifi is shaky, start with `MOCK_MODE=1 npm start` — the sample looks the same.
+4. Start a throwaway sample once and stop it, so fonts and the board are warm.
+5. Allow the microphone once on http://localhost:3000 (Start listening → Allow → Stop).
+
+## The 2-minute script
+
+| Time | Do | Say |
+|---|---|---|
+| 0:00 | Start card. Point at the two buttons. | "Facilitators run workshops; consultants bring frameworks. This listens to the room and quietly suggests the right framework — already filled in." |
+| 0:10 | **Try a sample workshop**, then **1.5×**. | "This is a scripted workshop for a fictional publisher choosing AI ideas. Same pipeline as the live mic." |
+| 0:25 | Let the transcript run. Point at the calm column. | "No chat box, no coaching — just the transcript. The model checks every few seconds whether a framework would genuinely help." |
+| 0:40 | Amber flag arrives. Read the reason; click the quote. | "It noticed we're weighing ideas on value and difficulty. Here's the exact line that triggered it." |
+| 0:55 | **Open board**. | "It's already filled in from what was said — every sticky placed by value and feasibility, with its source line." |
+| 1:05 | Click a sticky (source popover), drag one (turns solid), **Keep all**. | "Amber means suggested. Nothing is decided until the facilitator moves or keeps it." |
+| 1:20 | **Send to room** → room window on the projector. | "The room only ever sees what the facilitator accepted — on a calm, light, big-text view." |
+| 1:35 | Back in console: **Esc** — the *Stakeholder map* flag is waiting in the rail. | "It keeps listening — now the room is naming people and sign-offs, so it suggests a stakeholder map." |
+| 1:50 | **⌘K** → show the library list; mention custom frameworks. | "Firms can add their own frameworks; they're suggested and filled exactly the same way. Built on Meta's Muse Spark." |
+
+## The 30-second fallback (no mic, flaky network)
+
+1. `MOCK_MODE=1 npm start` (or just keep going — the app falls back on its own).
+2. Start card → **Paste a transcript instead** → **Use the sample transcript** → tick
+   **Process instantly** → **Start**.
+3. Flags are already in the rail → **Open board** → drag a sticky → **Keep all**.
+   "Same pipeline, from a pasted transcript."
+
+# Reference
+
+## 1. Sample workshop (main path)
 
 1. Start card → **Try a sample workshop**. The Harbourline transcript streams in.
 2. Optional: click **1.5×** in the top bar to speed it up.

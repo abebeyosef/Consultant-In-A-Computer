@@ -1,5 +1,5 @@
 STATUS: IN_PROGRESS
-Last updated: 2026-11-03 05:45
+Last updated: 2026-11-03 06:30
 Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s; fills 11–50s (minimal effort, hedged after 10s)
 
 | Milestone | Status | Notes |
@@ -16,11 +16,11 @@ Model: live (muse-spark-1.3 via api.meta.ai). Latency: smoke ~4s; checks 4–10s
 | M9 | DONE | board switcher, session summary, pill "Ended", provisional bar fits at 1280, start card fits at 800 high; QA shots at 1280×800 + 1728×1117 both themes |
 | M10 | DONE | Share menu (read-only link → /view#, PNG, .excalidraw, session notes Markdown), summary "Copy session notes"; e2e share.spec (fresh context opens link read-only) green |
 | M11 | DONE | /library "Add a framework" form (4 layouts), edit/remove, JSON import/export; appears in checks, ⌘K, chips; e2e custom.spec green; live check+fill verified; tag v0.2-night2 |
-| M12 | IN_PROGRESS | next: error boundaries, long-session perf, a11y pass, final DEMO.md |
-| M13 | TODO | |
+| M12 | DONE | error boundaries, perf check (2 h transcript, 0 long tasks), axe clean both themes, scan pacing for instant paste, final DEMO.md (2-min + 30-s scripts); 11/11 e2e green |
+| M13 | IN_PROGRESS | next: research meeting-bot options, bot source behind ENABLE_MEET_BOT |
 
 ## Next action
-M12: error boundaries (app/error.tsx + board boundary), confirm API failure → silent mock (engine status), cap window sizes, 2-hour transcript perf test (virtualise/chunk TranscriptView if laggy), a11y pass (labels, contrast, focus order), final DEMO.md (2-minute script + 30-second paste fallback); full e2e + screenshot pass.
+M13: research Recall.ai / Attendee / Vexa from official docs (log choice + costs in DECISIONS), implement `bot` TranscriptSource behind ENABLE_MEET_BOT=1 (start-card "Join a call", server adapter, transcript events into the pipeline), MEET_BOT_SETUP.md; must not affect any path with the flag off. Then tag v0.3-night3 and write STATUS: ALL_DONE.
 
 ## Blocked / fallbacks
 - none yet

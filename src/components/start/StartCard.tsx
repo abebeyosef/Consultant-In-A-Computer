@@ -205,7 +205,7 @@ export function StartCard({ meetBotEnabled = false }: { meetBotEnabled?: boolean
                     ))}
                 </SelectContent>
               </Select>
-              <span className="inline-flex h-8 w-14 items-center justify-center rounded-[8px] border border-hairline" aria-label="Input level">
+              <span className="inline-flex h-8 w-14 items-center justify-center rounded-[8px] border border-hairline" role="img" aria-label={level === null ? "Input level (microphone not allowed yet)" : "Input level"}>
                 <LevelMeter level={level ?? 0} active={level !== null} className={level !== null ? "text-live" : "text-ink-muted/50"} />
               </span>
             </div>

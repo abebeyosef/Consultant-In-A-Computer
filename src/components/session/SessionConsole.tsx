@@ -4,6 +4,7 @@ import { Pin } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { BoardBoundary } from "@/components/board/BoardBoundary";
 import { FrameworkCommand } from "@/components/board/FrameworkCommand";
 import { Button } from "@/components/ui/button";
 import { getAllFrameworks } from "@/lib/frameworks/registry";
@@ -150,7 +151,9 @@ function Console({ store }: { store: ConsoleStore }) {
         }
         main={
           view.kind === "board" ? (
-            <BoardHost key={view.boardId} boardId={view.boardId} animateIn={view.animateIn} autoFill={view.autoFill} onRefill={brain.refillBoard} />
+            <BoardBoundary key={view.boardId} onBack={() => store.getState().closeBoard()}>
+              <BoardHost boardId={view.boardId} animateIn={view.animateIn} autoFill={view.autoFill} onRefill={brain.refillBoard} />
+            </BoardBoundary>
           ) : focus ? (
             <FocusMode />
           ) : (

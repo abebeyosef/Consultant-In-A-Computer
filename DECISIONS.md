@@ -66,3 +66,8 @@
 - [M11] Import accepts an export bundle, an array, or a single template; imported ids equal to a built-in are prefixed `custom-`; same id replaces (so re-importing updates).
 - [M11] Form validation messages use ink, not red (red is reserved for Stop/delete per §8.1).
 - [M11] Verified live: Muse Spark picked a custom "Risk heat map" as a strong fit (4s) and filled it with sensible likelihood/severity scores (20s) — `scripts/try-custom.ts`.
+- [M12] Error boundaries per Next 16 docs: `app/error.tsx` (props `error`, `retry`), `app/global-error.tsx`, and a board-level `catchError` boundary so a whiteboard crash leaves the transcript, flags and listening running.
+- [M12] Long-session check: a seeded 1,600-segment (~2 h) transcript renders in well under a second and shows 0 long tasks over 15 s of streaming (`qa/tools/perf-long.mjs`), so no virtualisation was added (paragraphs already use `content-visibility: auto`).
+- [M12] Accessibility: axe-core (dev dependency, `qa/tools/a11y.mjs`) clean on start, library, console, board and room in both themes after two fixes — role on the mic level box, and dark-mode Stop text uses a new `--danger-ink` token (white on #F0675D was 3.1:1).
+- [M12] Instant-processed pastes use a new `scan` pacing profile (no gap between flags, each framework once) — the live 2-minute gap on the virtual clock hid all but one flag, which undermined the 30-second fallback demo.
+- [M12] Session summary sits below active flags in the rail (flags needing attention come first).

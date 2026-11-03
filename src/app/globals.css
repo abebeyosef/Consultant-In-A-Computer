@@ -19,6 +19,7 @@
   --color-signal-ink: var(--signal-ink);
   --color-live: var(--live);
   --color-danger: var(--danger);
+  --color-danger-ink: var(--danger-ink);
   --font-sans: var(--font-ui);
   --font-mono: var(--font-mono-stack);
   --font-heading: var(--font-ui);

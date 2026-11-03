@@ -55,7 +55,6 @@ export function FlagRail({
         ) : null}
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
-        {summary}
         {active.length === 0 && earlier.length === 0 && !summary ? (
           <p className="mx-auto mt-[18vh] max-w-[220px] text-center text-[14px] leading-[1.5] text-ink-muted" data-testid="rail-empty">
             Suggestions appear here when a framework could help.
@@ -86,6 +85,7 @@ export function FlagRail({
             })}
           </AnimatePresence>
         </div>
+        {summary ? <div className={active.length ? "mt-5" : undefined}>{summary}</div> : null}
         {earlier.length ? (
           <section className="mt-6" aria-label="Earlier suggestions" data-testid="earlier">
             <h3 className="mb-1.5 text-[12px] font-normal text-ink-muted">Earlier</h3>

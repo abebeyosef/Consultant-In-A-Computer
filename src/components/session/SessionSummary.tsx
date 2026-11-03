@@ -25,7 +25,7 @@ export function SessionSummary() {
   ];
 
   return (
-    <section className="mb-5 rounded-[12px] border border-hairline bg-surface p-4" aria-label="Session summary" data-testid="session-summary">
+    <section className="rounded-[12px] border border-hairline bg-surface p-4" aria-label="Session summary" data-testid="session-summary">
       <h3 className="mb-3 text-[14px] font-semibold">Session summary</h3>
       <dl className="grid grid-cols-2 gap-x-3 gap-y-2.5">
         {stats.map(([k, v]) => (

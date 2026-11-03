@@ -1,0 +1,12 @@
+import { chromium } from "@playwright/test";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 900 }, colorScheme: "dark" });
+await p.goto("http://localhost:3100/");
+await p.getByTestId("paste-link").click();
+await p.getByText("Use the sample transcript").click();
+await p.getByText("Process instantly").click();
+await p.getByTestId("paste-submit").click();
+await p.waitForURL(/session/);
+await p.waitForTimeout(3000);
+await p.screenshot({ path: "qa/screenshots/m12-fallback-dark.png" });
+await b.close();
